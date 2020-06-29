@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统配置.html" target="mainFrame">系统配置</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">远程端口配置</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="cn/css/metro/uniform.default.css" />
+<div class="row-fluid">
+    <div class="span12">
+	<style>
+	.even-row{background-color:#DFEFFC;}
+	.odd-row{background-color:#F5F8F9;}
+	textarea,select,input[type="text"]{margin-top: 10px;}
+	input[type="radio"]{margin:initial;}
+	</style>
+	<form id="addFormData" name="formData" style="margin:initial;">
+		<table width="100%" style="margin-top:10px;">
+			<tr>
+				<td>
+					<table class="data-table1" width="100%" border="0" cellpadding="0" cellspacing="0">
+				    	<colgroup><col width="20%">
+				           <col width="80%">
+				        </colgroup>
+				        <tbody>
+				        <tr height="25px" class="even-row">
+				        	<td style="padding-left: 15px;">SSH 端口</td>
+				            <td><input type="text" id="ssh_port" name="ssh_port" value="2222"><span style="color:green">&nbsp;&nbsp;范围[0-65535]</span></td>
+				        </tr>
+				        <tr height="25px" class="odd-row">
+				        	<td style="padding-left: 15px;">FTP 端口</td>
+				            <td><input type="text" id="ftp_port" name="ftp_port" value=""><span style="color:green">&nbsp;&nbsp;范围[0-65535]</span></td>
+				        </tr>
+				        <tr height="25px" class="even-row">
+				        	<td style="padding-left: 15px;">WEB 端口</td>
+				           <td><input type="text" id="http_port" name="http_port" value="8008"><span style="color:green">&nbsp;&nbsp;范围[0-65535]</span></td>
+				        </tr>
+				        <!--<tr height="25px" class="odd-row">
+				        	<td>SIP 端口</td>
+				           <td><input type="text" id="sip_port" name="sip_port" value="5060"><span style="color:green">&nbsp;范围[0-65535]</span></td>
+				        </tr>-->
+				        <tr height="25px" class="odd-row">
+				        	<td style="padding-left: 15px;">TELNET 端口</td>
+				           <td><input type="text" id="telnet_port" name="telnet_port" value="23"><span style="color:green">&nbsp;&nbsp;范围[0-65535]</span></td>
+				        </tr>
+				        <tr height="25px" class="odd-row">
+				        	<td style="padding-left: 15px;">TFTP 端口</td>
+				           <td><input type="text" id="tftp_port" name="tftp_port" value="69"><span style="color:green">&nbsp;&nbsp;范围[0-65535]</span></td>
+				        </tr>
+				    	</tbody>
+				    </table>
+				</td>
+			</tr>
+		</table>  
+		<input type="hidden" name="action" value="update">
+		<input type="hidden" name="subflag" value="020203">
+		<input type="hidden" id="old_ssh" name="old_ssh" value="2222">
+		<input type="hidden" id="old_ftp" name="old_ftp" value="">
+		<input type="hidden" id="old_http" name="old_http" value="8008">
+		<input type="hidden" id="old_sip" name="old_sip" value="5060">
+		<input type="hidden" id="old_telnet" name="old_telnet" value="23">
+		<input type="hidden" id="old_tftp" name="old_tftp" value="69">
+		<input type="hidden" id="tcpPort" name="tcpPort" value="69 80 161 389 443 1260 2222 5065 6001 8008">
+		<input type="hidden" id="udpPort" name="udpPort" value="123 5060 9092 5062 9001">
+		<input type="hidden" id="usedPort" name="usedPort" value="25,80,111,111,389,443,631,631,712,732,1883,2000,2812,3366,4520,4576,5000,5001,5006,5062,5062,5065,6001,6002,6379,7792,9001,9092,9230,9999,17296,22222,32767,33623,45551,49889,56862">
+	</form>
+	        <div style="width:100%;text-align: left;margin-top:10px;">
+            <span id="setBtn" class="btn btn-primary" onclick="confirmBut()">设置</span>
+        </div>
+    	</div>
+</div>
+<div id="ajaxMask" style="display:none;width:100%;height:100%;background-color:#000;position:absolute;top:0;left:0;z-index:10000;opacity:0.8;filter: alpha(opacity=80);">
+    <div style="top:45%;left:45%;width:125px;height:25px;position:absolute;z-index:10001; background-color:#FFFFFF;line-height:25px;text-align: center;">
+        <img src="cn/img/loading.gif" style="vertical-align:middle;"/> Loading...
+    </div>
+</div>	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script language="JavaScript">
+function inArray(str,arr){
+	for(var i=0;i<arr.length;i++){
+		if(arr[i]==str){
+			return true;
+		}
+	}
+	return false;
+}
+$(function(){	
+	$("#setBtn").click(function(){
+			var tcpPort=$("#tcpPort").val();
+			var udpPort=$("#udpPort").val();			
+			var ssh_port=$("#ssh_port").val();
+			var ftp_port=$("#ftp_port").val();
+			var http_port=$("#http_port").val();
+			//var sip_port=$("#sip_port").val();
+			var telnet_port=$("#telnet_port").val();
+			var tftp_port=$("#tftp_port").val();
+			var used_port=$("#usedPort").val();              //////////////////////////////
+			var list_usedPort=used_port.split(",");
+			var list_tcp=tcpPort.split(" ");
+			var list_udp=udpPort.split(" ");
+			var portStr="";
+			var usedStr="";
+			if(!inArray(ssh_port,list_tcp)){
+				portStr+=ssh_port+","
+			}
+			if(!inArray(ftp_port,list_tcp)){
+				portStr+=ftp_port+","
+			}
+			if(!inArray(http_port,list_tcp)){
+				portStr+=http_port+","
+			}
+			if(!inArray(telnet_port,list_tcp)){
+				portStr+=telnet_port+","
+			}
+			if(!inArray(tftp_port,list_tcp)){
+				portStr+=tftp_port+","
+			}
+			/*if(!inArray(sip_port,list_udp)){
+				portStr+=sip_port+","
+			}*/
+			if(ftp_port==ssh_port){
+				alert("该端口已被设置，为了避免冲突，请重新设置！");
+				return false;
+			}
+			if((http_port==ssh_port)||(http_port==ftp_port)){
+				alert("该端口已被设置，为了避免冲突，请重新设置！");
+				return false;
+			}
+			if((telnet_port==ssh_port)||(telnet_port==ftp_port)||(telnet_port==http_port)){
+				alert("该端口已被设置，为了避免冲突，请重新设置！");
+				return false;
+			}
+			if((tftp_port==ssh_port)||(tftp_port==ftp_port)||(tftp_port==http_port)||(tftp_port==telnet_port)){
+				alert("该端口已被设置，为了避免冲突，请重新设置！");
+				return false;
+			}
+			if(inArray(ssh_port,list_usedPort)){
+				usedStr+=ssh_port+",";
+			}
+			if(inArray(ftp_port,list_usedPort)){
+				usedStr+=ftp_port+",";
+			}
+			if(inArray(http_port,list_usedPort)){
+				usedStr+=http_port+",";
+			}
+			if(inArray(telnet_port,list_usedPort)){
+				usedStr+=telnet_port+",";
+			}
+			if(inArray(tftp_port,list_usedPort)){
+				usedStr+=tftp_port+",";
+			}
+			if(usedStr.length>0){
+				alert(usedStr+"端口已被占用，请重新设置端口！");
+				return false;
+			}else{
+				if(portStr.length>0){
+					alert(portStr+"端口未开放，请到系统维护->系统防火墙页面设置TCP端口！");
+					return false;
+				}else{
+				//window.location.href="index.php?command=1&httpport="+$("#http_port").val()+"&oldhttp="+$("#old_http").val();
+				//if($("#http_port").val()!=$("#old_http").val()){
+					alert("端口更改需重启服务器，请稍候！");
+					//alert(parent.location.href);
+					var oldhref=parent.location.href;
+					var port=$("#http_port").val();
+					var newhref="";
+					var list=oldhref.split("/");
+					for(var i=0;i<list.length;i++){
+						if(i==2){
+							var list1=list[i].split(":");
+							list[i]=list1[0]+":"+port;
+						}
+						if(i<list.length-1){
+							newhref+=list[i]+"/";
+						}
+					}
+/*					newhref+="index.php";
+					parent.location.href=newhref;*/
+					$.get("modules/advancedmgr/mycommand.php",{
+						http_port:$("#http_port").val(),				
+						old_http:$("#old_http").val(),
+						ssh_port:$("#ssh_port").val(),
+						ftp_port:$("#ftp_port").val(),
+						//sip_port:$("#sip_port").val(),
+						old_ssh:$("#old_ssh").val(),
+						old_ftp:$("#old_ftp").val(),
+						//old_sip:$("#old_sip").val(),
+						telnet_port:$("#telnet_port").val(),
+						old_telnet:$("#old_telnet").val(),
+						tftp_port:$("#tftp_port").val(),
+						old_tftp:$("#old_tftp").val()
+					},function(data,textStatus){
+						//alert(data);
+						//window.location.href="index.php";
+						if(data.indexOf("port=")!=-1){
+							alert(data.substr(5)+"端口未开放，请到系统配置->系统防火墙页面设置TCP端口！");
+						}else{
+							alert("端口更改需重启服务器，请稍候！");
+							window.location.href="index.php";				
+						}
+					});	
+					//window.location.href="index.php";
+				//}
+			}
+			
+			}
+		
+	});
+});
+</script>

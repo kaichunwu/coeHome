@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统配置.html" target="mainFrame">系统配置</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">许可信息</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><script language="JavaScript">
+function inArray(str,arr){
+	for(var i=0;i<arr.length;i++){
+		if(arr[i]==str){
+			return true;
+		}
+	}
+	return false;
+}
+
+</script>
+<div class="row-fluid">
+    <div class="span12">
+	<style>
+	.even-row{background-color:#DFEFFC;}
+	.odd-row{background-color:#F5F8F9;}
+	textarea,input[type="text"]{margin-top: 10px;}
+	</style>
+		<form id="addFormData" name="formData" style="margin:10px 0;padding:5px;border:1px solid #f5f5f5;">
+			<table width="100%">
+				<colgroup>
+					<col width="20%" />
+					<col width="60%" />
+					<col width="20%" />
+				</colgroup>
+				<tr>
+					<td>&nbsp;&nbsp;鉴权序列号<font color="red">*</font></td>
+					<td><input type="text" name="serialnumber" id="serialnumber" value="" style="width:90%;"/></td>
+					<td><!-- servicemgr_permitinfo -->
+					<span class="btn btn-primary" onclick="confirmBut()">设置</span>
+					<input type="hidden" name="action" value="set">
+					<input type="hidden" id="subflag" name="subflag" value="020303">
+					<input type="hidden" id="oldValue" name="oldValue" value="S015420180505271014100A140C8140320C803E83E80F01E-38353024">
+					<input type="hidden" id="MD5List" name="MD5List" value="">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>  		
+		<div class="listDiv" id="divinfo">
+		<table  class="data-table1" cellSpacing="1" cellPadding="5" width="100%" bgColor="#A6C9E2" border="0">
+		  <tr height="40" class="even-row">
+		  	 <td align="center">鉴权序列号</td>
+			 <td align="center" colspan="3">S015420180505271014100A140C8140320C803E83E80F01E-38353024</td>	
+		  </tr>
+		  <tr height="40" class="odd-row">
+			 <td align="center">设备编号</td>	
+			 <td align="center" colspan="3">32736537</td>				 
+		  </tr>
+			  <tr height="40" class="even-row">
+		  	<td align="center">剩余天数</td>	
+			 			 <td align="center" colspan="3"><font color="Red">0</font></td>	
+			 		  </tr>
+		  <tr height="40" class="odd-row">
+		  	 <td align="center" width="30%">SIP注册用户数</td>
+			 <td align="center" width="20%">10000</td>	
+			 <td align="center" width="30%">IP中继数</td>	
+			 <td align="center">10</td>				 
+		  </tr>
+		  <tr height="40" class="even-row">
+		  	 <td align="center">IM用户数</td>
+			 <td align="center">1000</td>	
+			 <td align="center">彩铃用户数</td>	
+			 <td align="center">20</td>				 
+		  </tr>
+		  <tr height="40" class="odd-row">
+		  	 <td align="center">计费用户数</td>
+			 <td align="center"></td>	
+			 <td align="center">PC话务台数</td>	
+			 <td align="center">20</td>				 
+		  </tr>
+		  <tr height="40" class="even-row">
+		  	 <td align="center">用户开通录音数</td>
+			 <td align="center">200</td>	
+			 <td align="center">语音信箱用户数</td>	
+			 <td align="center">200</td>				 
+		  </tr>
+		  <tr height="40" class="odd-row">
+		  	 <td align="center">呼叫通道数</td>
+			 <td align="center">1000</td>	
+			 <td align="center">电子传真用户数</td>	
+			 <td align="center"></td>				 
+		  </tr>
+		  <tr height="40" class="even-row">
+		  	 <td align="center">CTI接口数</td>
+			 <td align="center">50</td>	
+			 <td align="center">允许国际长途</td>	
+			 <td align="center">否</td>	 		 
+		  </tr>
+ 				</table>
+</div>
+</div>
+<div id="ajaxMask" style="display:none;width:100%;height:100%;background-color:#000;position:absolute;top:0;left:0;z-index:10000;opacity:0.8;filter: alpha(opacity=80);">
+    <div style="top:45%;left:45%;width:125px;height:25px;position:absolute;z-index:10001; background-color:#FFFFFF;line-height:25px;text-align: center;">
+        <img src="cn/img/loading.gif" style="vertical-align:middle;"/> Loading...
+    </div>
+</div>	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script language="JavaScript">
+function confirmBut() {
+   if(!isEmpty($("#serialnumber").val())){
+   var MD5Value=$("#serialnumber").val();
+//判断如果是临时的序列号，那么对鉴权好进行重复的检验。
+	if(MD5Value.substr(3,2)=="54"){
+			 var oldValue=$("#oldValue").val();
+			var MD5List=$("#MD5List").val();
+		// alert(MD5List);
+			if(inArray(MD5Value,MD5List)||(MD5Value==oldValue)){
+			alert("鉴权序列号重复，请重新输入！");
+			return false;
+			}
+		}		 
+	}
+
+	if(!isEmpty($("form[name=formData]").find("#serialnumber").val())&&!isLicense($.trim($("form[name=formData]").find("#serialnumber").val()))){
+		$("form[name=formData]").find("#serialnumber").focus();
+		alert("序列号格式不合法！");
+		return false;
+	}
+
+    $.ajax({
+       type: "POST",
+       url: "admin.php?op=servicemgr_permitinfo",
+       data: $("#addFormData").serialize(),
+       dataType:'json',
+        beforeSend: function () {
+           ShowLoading();
+        },
+        complete: function () {
+            HiddenLoading();
+        },
+       success: function(res){
+        if(res.code=='00'){
+            alert(res.text);
+            location.href = 'admin.php?op=servicemgr_permitinfo&subflag=020303';
+        }else{
+            alert(res.text);
+        }
+       },
+       error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert('error');
+            console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+       }
+    });
+
+	return true;
+}
+</script>

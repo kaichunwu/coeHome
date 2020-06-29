@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统维护.html" target="mainFrame">系统维护</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">定时重启</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><div class="row-fluid">
+    <div class="span12">
+	<style>
+	.even-row{background-color:#DFEFFC;}
+	.odd-row{background-color:#F5F8F9;}
+	textarea,input[type="text"],select{margin-top: 10px;}
+	label{display: inline;}
+	</style>    
+		<form name="formData" method="post" action="admin.php?op=sysmgr_crontabreboot" style="margin:10px 0;" onSubmit="return form_Validator(this);">
+			<table width="100%">
+				<colgroup>
+					<col width="30%" />
+					<col width="70%" />
+				</colgroup>
+			        <tr height="25px" class="even-row">
+			        	<td style="padding-left: 15px;">开关</td>
+			            <td>
+			            	<select name="rebootSwitch" id="rebootSwitch" style="width: auto;"><option value='0' selected>关闭</option><option value='1'>开启</option></select>
+			            </td>
+			        </tr>
+			        <tr height="25px" class="odd-row c_detail" style="display: none;">
+			        	<td style="padding-left: 15px;">时间</td>
+			            <td>
+			            	<input type="text" style="width:auto" name="timer" value="">
+			            	<span style="color:green">(格式:时[0-23]:分[0-59] 23:05)</span>
+			            </td>
+			        </tr>
+			        <tr height="52x" class="even-row c_detail" style="display: none;">
+			        	<td style="padding-left: 15px;">重启星期</td>
+			            <td>
+			            	<input type="checkbox" id="doW1" value="1" name="week" style='vertical-align: middle; margin-bottom: 4px;'> <label
+							for="doW1">星期一</label>&nbsp;&nbsp;<input type="checkbox" id="doW2" value="2" name="week" style='vertical-align: middle; margin-bottom: 4px;'><label
+							for="doW2">星期二</label>&nbsp;&nbsp;<input type="checkbox" id="doW3" value="3" name="week" style='vertical-align: middle; margin-bottom: 4px;'><label
+							for="doW3">星期三</label>&nbsp;&nbsp;<input type="checkbox" id="doW4" value="4" name="week" style='vertical-align: middle; margin-bottom: 4px;'><label
+							for="doW4">星期四</label>&nbsp;&nbsp;<input type="checkbox" id="doW5" value="5" name="week" style='vertical-align: middle; margin-bottom: 4px;'><label
+							for="doW5">星期五</label>&nbsp;&nbsp;<input type="checkbox" id="doW6" value="6" name="week" style='vertical-align: middle; margin-bottom: 4px;'><label
+							for="doW6">星期六</label>&nbsp;&nbsp;<input type="checkbox" id="doW7" value="0" name="week" style='vertical-align: middle; margin-bottom: 4px;'><label
+							for="doW7">星期日</label><input id="doW" name="doW" type="hidden" value="" />
+							<input type="hidden" name="action" value="set" /><input type="hidden" name="subflag" value="030107" />
+			            </td>
+			        </tr>
+			</table>
+							<div style="width:100%;text-align: left;margin-top:10px;">
+			    	<input type="submit" class="btn btn-primary" value="设置">
+			    </div>
+		    		</form>
+	</div>
+</div>
+	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script>
+	$(function(){
+		$("#rebootSwitch").change(function() {
+			if($(this).val() == 1){
+				$(".c_detail").show();
+			}else{
+				$(".c_detail").hide();
+			}
+		}).change();
+
+		var doWInit ="";
+		if(doWInit!="")
+		{
+			var shuFlag = doWInit.split(',');
+			$("input[name=week]").each(function() {
+				if($.inArray($(this).val(),shuFlag) != '-1'){
+					$(this).attr('checked', 'checked');
+				}
+			});
+		} 
+
+		$("input[name=week]").change(function(){
+		        var text="";  
+				var doW="";
+		        $("input[name=week]:checked").each(function() {  
+		        	text  += $(this).val()+','
+		    	});
+		    	$("input[name=doW]").val(text.slice(0,-1))
+		});
+
+
+	})
+
+	function form_Validator(f) {
+		var timer = $('#timer').val();
+		if(timer =="")
+		{
+			alert('请填写重启时间');
+			$('#timer').focus();
+			return false;
+		}else{
+			var timeArr = timers.split(',');
+			var hours = timeArr[0];
+			var mintues = timeArr[1];
+			if(hours > 23 || hours < 0 || mintues < 0 || mintues >59 || (hours<10 && hours.length>1) || (mintues<10 && mintues.length > 1)){
+				alert('时间格式有误,请重新填写');
+				$('#timer').focus();
+				return false;
+			}
+		}
+		if($('#doW').val() == ''){
+			alert('请选择重启时间');
+			return false;
+		}
+		return true;
+	}
+</script>

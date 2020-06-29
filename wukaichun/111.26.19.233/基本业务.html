@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet"
+	id="style_color" />
+<script src="cn/jscript/metro/jquery-1.8.3.min.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="cn/jscript/reg.js"></script>
+<script language="JavaScript" src="cn/jscript/md5.js"></script>
+<link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="cn/css/metro/uniform.default.css" />
+<style>
+#form1 td {
+	white-space: nowrap;
+}
+
+form[name=form1] td {
+	white-space: nowrap;
+}
+
+select {
+	margin-bottom: auto;
+}
+
+table input[type="text"], input[type="password"] {
+	width: auto;
+}
+
+table select {
+	width: auto;
+}
+</style>
+<title></title>
+</head>
+<body style="background: #FFFFFF;">
+	<div class="row-fluid">
+		<div class="span12"
+			style="margin: 10px 0; padding: 5px; border: 1px solid #f5f5f5;">
+			<table width="100%">
+				<tr>
+					<td style="padding: 10px 0">&nbsp;&nbsp;语音名称</td>
+				</tr>
+				
+				<tr style="height: 35px;">
+					<td align="left" style="padding: 10px"><input
+						style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+						value="默认提示音" onclick="chkone()">&nbsp;默认提示音</td>
+
+					<td align="left" style="padding: 10px"><input
+						style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+						value="暂时无法接通" onclick="chkone()">&nbsp;暂时无法接通</td>
+
+					<td align="left" style="padding: 10px"><input
+						style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+						value="无权拨号" onclick="chkone()">&nbsp;无权拨号</td>
+
+					<td align="left" style="padding: 10px"><input
+						style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+						value="号码不存在" onclick="chkone()">&nbsp;号码不存在</td>
+
+					<td align="left" style="padding: 10px"><input
+						style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+						value="无人接听" onclick="chkone()">&nbsp;无人接听</td>
+				</tr>
+				<tr style="height: 35px;">
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="线路忙" onclick="chkone()">&nbsp;线路忙</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="用户正忙" onclick="chkone()">&nbsp;用户正忙</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="无法接通488" onclick="chkone()">&nbsp;无法接通488</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="按键超时" onclick="chkone()">&nbsp;按键超时</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="回铃音" onclick="chkone()">&nbsp;回铃音</td>
+				</tr>
+				<tr style="height: 35px;">
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="拨号音" onclick="chkone()">&nbsp;拨号音</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音0" onclick="chkone()">&nbsp;提示音0</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音1" onclick="chkone()">&nbsp;提示音1</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音2" onclick="chkone()">&nbsp;提示音2</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音3" onclick="chkone()">&nbsp;提示音3</td>
+				</tr>
+				<tr style="height: 35px;">
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音4" onclick="chkone()">&nbsp;提示音4</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音5" onclick="chkone()">&nbsp;提示音5</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音6" onclick="chkone()">&nbsp;提示音6</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音7" onclick="chkone()">&nbsp;提示音7</td>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音8" onclick="chkone()">&nbsp;提示音8</td>
+				</tr>
+
+				<td align="left" style="padding: 10px"><input
+					style="margin: initial;" type="radio" id="chk_one" name="chk_one"
+					value="提示音9" onclick="chkone()">&nbsp;提示音9</td>
+
+				</td>
+			</table>
+
+			<form id="uploadForm" method="POST" enctype="multipart/form-data"
+				style="margin: initial;">
+				<table width="100%">
+					<tr>
+						<td style="padding: 10px 0">&nbsp;&nbsp;语音类型</td>
+						<td><select style="margin-bottom: initial;" id="voicetype"
+							name="voicetype" value="" onchange="changefile()"><option
+									value='0'>默认</option>
+								<option value='1'>自定义</option></td>
+						<td>&nbsp;&nbsp;语音文件</td>
+						<td><input type="file" id="impfile" name="impfile"
+							disabled="true"></td>
+						<td><span class="btn btn-primary" onclick="getvoiceinfo()">设置</span>
+							<input type="hidden" id="subflag" name="subflag" value="">
+							<input type="hidden" name="action" value="set"> <input
+							type="hidden" id="checkedvoicename" name="checkedvoicename"
+							value=""></td>
+					</tr>
+					<tr>
+						<td><span style="color: green">&nbsp;&nbsp;提示：语音文件格式仅支持wav，小于5M</span></td>
+					</tr>
+				</table>
+			</form>
+
+		</div>
+	</div>
+	<div id="ajaxMask"
+		style="display: none; width: 100%; height: 100%; background-color: #000; position: absolute; top: 0; left: 0; z-index: 10000; opacity: 0.8; filter: alpha(opacity = 80);">
+		<div
+			style="top: 45%; left: 45%; width: 125px; height: 25px; position: absolute; z-index: 10001; background-color: #FFFFFF; line-height: 25px; text-align: center;">
+			<img src="cn/img/loading.gif" style="vertical-align: middle;" />
+			Loading...
+		</div>
+	</div>
+	<script language="JavaScript">
+		function changefile() {
+			if ($("#voicetype").val() == 0) {
+				$("#impfile").attr("disabled", true);
+			} else {
+				$("#impfile").attr("disabled", false);
+			}
+		}
+		function getvoiceinfo() {
+			var voicename = $("input[name='chk_one']:checked").val();
+			document.getElementById("checkedvoicename").value = voicename;
+
+			if (!isEmpty($("#impfile").val())) {
+				var list = ($("#impfile").val()).split('\\');
+				var name = list[list.length - 1];
+				if (!isChinese(name)) {
+					$("#impfile").focus();
+					alert("上传文件名不合法，请重新上传！");
+					return false;
+				}
+			}
+
+			var formData = new FormData($("#uploadForm")[0]);
+			$
+					.ajax({
+						type : "POST",
+						url : "admin.php?op=servicemgr_voicebasicinfo",
+						data : formData,
+						cache : false,
+						contentType : false,
+						processData : false,
+						dataType : 'json',
+						beforeSend : function() {
+							ShowLoading();
+						},
+						complete : function() {
+							HiddenLoading();
+						},
+						success : function(res) {
+							if (res.code == '00') {
+								alert(res.text);
+								location.href = 'admin.php?op=servicemgr_voicebasicinfo&subflag=';
+							} else {
+								alert(res.text);
+							}
+						},
+						error : function(XMLHttpRequest, textStatus,
+								errorThrown) {
+							alert('error');
+							console.log(XMLHttpRequest.status + '|'
+									+ XMLHttpRequest.readyState + '|'
+									+ textStatus);
+						}
+					});
+			return true;
+		}
+	</script>
+	<div style="height: 40px;"></div>
+	<script type="text/javascript"
+		src="cn/jscript/metro/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript">
+		$(document)
+				.bind(
+						'mousewheel DOMMouseScroll',
+						function(e) {
+							var offset = $(window.parent.document).scrollTop();
+							var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1
+									: -1))
+									|| // chrome & ie
+									(e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1
+											: 1)); // firefox
+							if (delta > 0) {
+								$(window.parent).scrollTop(offset - 40); // 向上滚
+							} else if (delta < 0) {
+								$(window.parent).scrollTop(
+										parseInt(offset) + parseInt(40)); // 向下滚
+							}
+						});
+	</script>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script>

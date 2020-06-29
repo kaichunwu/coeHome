@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8" />
+   <title>IPPBX管理系统</title>
+   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+   <meta name="renderer" content="webkit"/>
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+   <link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+   <link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+   <link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+   <link href="cn/css/metro/style.css" rel="stylesheet" />
+   <link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+   <link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+   <script type="text/javascript" src="cn/jscript/metro/jquery-1.8.3.min.js"></script>
+</head><body class="fixed-top" style="overflow-y: hidden;font-family: 'Microsoft YaHei',Arial,Helvetica,sans-serif;">
+   <div id="header" class="navbar navbar-inverse navbar-fixed-top">
+   <div class="navbar-inner">
+       <div class="container-fluid">
+           <div class="sidebar-toggle-box hidden-phone">
+               <div class="icon-reorder tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+           </div>
+           <a href="javascript:;" class="brand" style="color: #ffffff;">UC1000</a>
+           <a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="arrow"></span>
+           </a>
+           <div class="top-nav">
+               <ul class="nav pull-right top-menu" >                   
+                   <li class="dropdown">
+                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                           <img src="cn/img/metro/avatar2_small.png" alt="">
+                           <span class="username">admin</span>
+                           <b class="caret"></b>
+                       </a>
+                       <ul class="dropdown-menu extended logout">
+                           <!-- <li><a href="javascript:;" onclick="screen_lock();"><i class="icon-cog"></i>屏幕锁定</a></li> -->
+                           <li><a href="admin.php?action=logout"><i class="icon-key"></i>退出</a></li>
+                       </ul>
+                   </li>
+               </ul>
+           </div>
+       </div>
+   </div>
+</div>
+
+<script>
+function before_logout(){
+	var is_confirmed=confirm("确定要退出吗？");
+	if(is_confirmed){
+	  return true;
+	}else{
+	  return false;
+	}
+}
+</script>   <div id="container" class="row-fluid" style="margin-top:0 !important;">
+      <div class="sidebar-scroll" style="overflow-y: hidden;overflow-x:hidden;width:130px;">
+	<div id="sidebar" class="nav-collapse collapse" style="width:130px;">
+	 <style>
+		#sidebar > ul > li > a{width:auto;}
+		#sidebar > ul > li a i{display:block;text-align: center;margin: 0 auto;font-size: 50px;width:auto;padding:15px;}
+		#sidebar > ul > li > a > span{display:block;text-align: center;margin: 0 auto;padding-bottom: 10px;}
+	 </style>
+	  <ul class="sidebar-menu" style="padding-top:60px;">
+	  	 
+	      <li class="sub-menu">
+	          <a class="" href="admin.php?op=basicmgr_index&subflag=01" target="mainFrame">
+	              <i class="icon-dashboard"></i>
+	              <span>PBX配置分类</span>
+	          </a>
+	      </li>
+	     
+	      <li class="sub-menu">
+	          <a class="" href="admin.php?op=servicemgr_index&subflag=02" target="mainFrame">
+	              <i class="icon-cogs"></i>
+	              <span>系统配置</span>
+	          </a>
+	      </li>
+	     
+	      <li class="sub-menu">
+	          <a class="" href="admin.php?op=sysmgr_index&subflag=03" target="mainFrame">
+	              <i class="icon-wrench"></i>
+	              <span>系统维护</span>
+	          </a>
+	      </li>
+	    	  </ul>
+	</div>
+</div>
+<script>
+	$(function(){
+		$(".sub-menu").click(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+		});
+	})
+</script>      
+      <div id="main-content" style="margin-left: 130px;">
+         <iframe name="mainFrame"  id="mainFrame" src="admin.php?op=welcome" width="100%" height="100%" marginwidth="0" marginheight="0" scrolling="auto" frameborder="0"></iframe>
+         <div style="position:fixed;bottom:0;width:100%;height:30px;line-height: 30px;text-align: right;background:#F2FAFF;z-index: 0;">
+              <div style="width:auto;display:inline;color:green;margin-right: 30px;" id="operator">当前用户：admin</div>
+              <div style="width:auto;display:inline;color:green;margin-right: 30px;" id="status">当前工作服务器：主</div>
+              <div style="width:auto;display:inline;color:green;margin-right: 160px;" id="innerTime">2018-08-01 09:30:40</div>
+         </div>
+         <div style="clear:both;"></div>
+      </div>
+   </div>
+  <script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>   
+<script>
+var Script = function () {
+//    sidebar dropdown menu
+    jQuery('#sidebar .sub-menu > a').click(function () {
+        var last = jQuery('.sub-menu.open', $('#sidebar'));
+        last.removeClass("open");
+        jQuery('.arrow', last).removeClass("open");
+        jQuery('.sub', last).slideUp(200);
+        var sub = jQuery(this).next();
+        if (sub.is(":visible")) {
+            jQuery('.arrow', jQuery(this)).removeClass("open");
+            jQuery(this).parent().removeClass("open");
+            sub.slideUp(200);
+        } else {
+            jQuery('.arrow', jQuery(this)).addClass("open");
+            jQuery(this).parent().addClass("open");
+            sub.slideDown(200);
+        }
+        var o = ($(this).offset());
+        diff = 200 - o.top;
+        if(diff>0)
+            $(".sidebar-scroll").scrollTo("-="+Math.abs(diff),500);
+        else
+            $(".sidebar-scroll").scrollTo("+="+Math.abs(diff),500);
+    });
+
+//    sidebar toggle
+    $('.icon-reorder').click(function () {
+        if ($('#sidebar > ul').is(":visible") === true) {
+            $(".sidebar-scroll").css({
+                'z-index':-1
+            });
+            $('#main-content').css({
+                'margin-left': '0px'
+            });
+            $('#sidebar').css({
+                'margin-left': '-130px'
+            });
+            $('#sidebar > ul').hide();
+            $('#innerTime').css({
+                'margin-right': '10px'
+            });
+            $("#container").addClass("sidebar-closed");
+        } else {
+            $(".sidebar-scroll").css({
+                'z-index':100
+            });
+            $('#main-content').css({
+                'margin-left': '130px'
+            });
+            $('#sidebar > ul').show();
+            $('#sidebar').css({
+                'margin-left': '0'
+            });
+            $('#innerTime').css({
+                'margin-right': '200px'
+            });
+            $("#container").removeClass("sidebar-closed");
+        }
+    });
+
+    jQuery('#theme-change .colors span').click(function () {
+        var color = $(this).attr("data-style");
+        setColor(color);
+    });
+
+    jQuery('#theme-change .layout input').change(function () {
+        setLayout();
+    });
+
+    var setColor = function (color) {
+        $('#style_color').attr("href", "css/style-" + color + ".css");
+    }
+
+    jQuery('.widget .tools .icon-chevron-down').click(function () {
+        var el = jQuery(this).parents(".widget").children(".widget-body");
+        if (jQuery(this).hasClass("icon-chevron-down")) {
+            jQuery(this).removeClass("icon-chevron-down").addClass("icon-chevron-up");
+            el.slideUp(200);
+        } else {
+            jQuery(this).removeClass("icon-chevron-up").addClass("icon-chevron-down");
+            el.slideDown(200);
+        }
+    });
+
+    jQuery('.widget .tools .icon-remove').click(function () {
+        jQuery(this).parents(".widget").parent().remove();
+    });
+
+    $('.element').tooltip();
+    $('.tooltips').tooltip();
+    $('.popovers').popover();
+}();
+</script>
+<script type="text/javascript" src="cn/jscript/tp/mybase.js"></script></body>
+<script type="text/javascript">
+$(function(){
+  var wHeight = $(window).height();
+  $("#mainFrame").css({"height":wHeight});
+  window.onresize=function(){  
+     changeFrameHeight();  
+  }
+  function changeFrameHeight(){
+    var wHeight = $(window).height();
+    $("#mainFrame").css({"height":wHeight});
+  }
+});
+
+if(''){
+
+  var oldUrl=window.location.href;
+  var list=oldUrl.split("&returninfo=");
+  var newUrl=list[0];
+  if(list.length==2){
+    //alert(decodeURI(list[1]));
+  } 
+  window.location.href=newUrl;
+  window.location.replace(newUrl);
+}
+
+  var change_date = '' ;
+  var change = 0 ;
+  var username = '';
+  var userInterval = '';
+  var statusInterval = '';    
+  var year,month,day,hour,min,second;
+  var cur_date = $("#innerTime").html();
+  var flag = 0;
+  function parse_date(date){
+    year = date.substr(0,4);
+    month = date.substr(5,2);
+    day = date.substr(8,2);
+    hour = date.substr(11,2);
+    min = parseInt(date.substr(14,2));
+    second = parseInt(date.substr(17,2));
+  }
+var maxDate = null;
+function dspCurDT() {
+  if(flag == 0) {
+    parse_date(cur_date);
+    flag = 1;
+  } else if(change == 1) {
+    parse_date(change_date);
+    change = 0;
+  }
+  if ((++second) > 59) {
+      second = 0;
+      if ((++min) > 59) {
+        min = 0;
+        if ((++hour) > 23) {
+          hour = 0;
+          maxDate = 0;
+          switch (month) {
+          case 1, 3, 5, 7, 8, 10, 12:
+              maxDate = 31;
+              break;
+          case 4, 6, 9, 11:
+              maxDate = 30;
+             break;
+          case 2:
+              maxDate = ((((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) ? true : false) ? 29 : 28;
+          }
+          if ((++day) > maxDate) {
+            day = 1;
+            if ((++month) > 12) {
+             month = 1;
+              ++year;
+            }
+          }
+        }
+      }
+  }
+  var sNow = ''+year+'-'+month+'-'+day+' '+hour 
+      + ':' + ((min < 10) ? ('0' + min) : min) 
+      + ':' + ((second < 10) ? ('0' + second) : second);
+  $("#innerTime").html(sNow);   
+}
+setInterval(dspCurDT,1000); 
+</script>
+</html>

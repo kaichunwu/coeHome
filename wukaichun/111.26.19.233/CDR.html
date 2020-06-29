@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="配置分类.html" target="mainFrame">PBX配置分类</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">CDR</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><style>
+	.even-row{background-color:#DFEFFC;}
+	.odd-row{background-color:#F5F8F9;}
+	textarea,select,input[type="text"]{margin-top: 10px;}
+	form{margin:0;}
+</style>
+<div class="row-fluid">
+  <div class="span12">
+	<form id="updateFormData" name="formData">
+	<table width="100%" style="margin-top:10px;">
+		<tr>
+			<td>
+				<table class="data-table1" width="100%" border="0" cellpadding="0" cellspacing="0">
+			    	<colgroup>
+						<col width="30%">
+						<col width="70%">
+			        </colgroup>
+			        <tbody>
+			        <tr height="25px" class="even-row">
+			        	<td nowrap="nowrap" style="padding-left: 15px;">内线话单开关</td>
+			            <td>
+							<select id="inner_switch" name="inner_switch" style="width:auto;"><option value='0'>关闭</option><option value='1' selected>打开</option></select>
+						</td>
+			        </tr>
+				  	<tr height="25px" class="odd-row">
+			        	<td nowrap="nowrap" style="padding-left: 15px;">外线呼入话单开关</td>
+			            <td>
+							<select id="outer_switch" name="outer_switch" style="width:auto;"><option value='0'>关闭</option><option value='1' selected>打开</option></select>
+						</td>
+			        </tr>
+			        <tr height="25px" class="even-row">
+			        	<td nowrap="nowrap" style="padding:10px 0px 10px 15px;">保存记录数</td>
+			            <td>
+<!-- 							<input type="text" id="records" name="records" value="500000" readonly="readonly"
+								class="ui-widget ui-widget-content ui-corner-all" style="width:180px">&nbsp;
+							<span class="span-info">&nbsp;(单位:条) </span>
+ -->
+								<span>500000	条</span>&nbsp;
+						</td>
+			        </tr>     
+				  	<tr height="25px" class="odd-row">
+			        	<td nowrap="nowrap" style="padding:10px 0px 10px 15px;">保存天数</td>
+			            <td>
+<!--
+								<input type="text" id="days" name="days" value="180" readonly="readonly"
+									class="ui-widget ui-widget-content ui-corner-all"  style="width:180px">&nbsp;
+								<span class="span-info">&nbsp;(单位:天)</span>-->
+								<span>180	天 </span>&nbsp;
+						</td>
+			        </tr>    
+				  	<tr height="25px" class="even-row">
+			        	<td nowrap="nowrap" style="padding:10px 0px 10px 15px;">日志路径</td>
+			            <td>
+			<!--					<input type="text" id="dir" name="dir" value="/Log/cdr/"  readonly="readonly"
+									class="ui-widget ui-widget-content ui-corner-all" style="width:180px">&nbsp;
+-->
+								<span>/Log/cdr/ </span>&nbsp;
+						</td>
+			        </tr>
+
+				<tr height="25px" class="odd-row">
+			        	<td nowrap="nowrap" style="padding-left: 15px;">CDR对接地址</td>
+			            <td>
+						<input type="text" id="cdrIP" name="cdrIP" value=""192.168.3.49"" style="width:auto;">&nbsp;</td>
+			        </tr>
+			    </tbody>
+			    </table>
+			</td>
+		</tr>
+		<input type="hidden" name="subflag" value="010408">
+		<input type="hidden" name="action" value="update">
+				<tr height="40px">
+	        <td><span class="btn btn-primary" onclick="form_Validator()">设置</span></td>
+	    </tr>
+	    	</table>    
+	</form>		
+	</div>
+</div>
+<div style="height:40px;"></div>
+<div id="ajaxMask" style="display:none;width:100%;height:100%;background-color:#000;position:absolute;top:0;left:0;z-index:10000;opacity:0.8;filter: alpha(opacity=80);">
+    <div style="top:45%;left:45%;width:125px;height:25px;position:absolute;z-index:10001; background-color:#FFFFFF;line-height:25px;text-align: center;">
+        <img src="cn/img/loading.gif" style="vertical-align:middle;"/> Loading...
+    </div>
+</div>	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script language="JavaScript">
+function form_Validator() 
+{
+	if(!isIp($("#cdrIP").val())){
+	 alert("CDR服务器地址不正确，请重新输入！");
+	 return false;
+	}
+
+    $.ajax({
+       type: "POST",
+       url: "admin.php?op=basicmgr_confCDR",
+       data: $("#updateFormData").serialize(),
+       dataType:'json',
+        beforeSend: function () {
+           ShowLoading();
+        },
+        complete: function () {
+            HiddenLoading();
+        },
+       success: function(res){
+        if(res.code=='00'){
+            alert(res.text);
+            location.href = 'admin.php?op=basicmgr_confCDR&subflag=010408';
+        }else{
+            alert(res.text);
+        }
+       },
+       error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert('error');
+            console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+       }
+    });
+
+	return true;
+}
+</script>

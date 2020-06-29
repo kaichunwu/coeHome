@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统配置.html" target="mainFrame">系统配置</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">网管权限管理</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="cn/css/metro/uniform.default.css" />
+
+	<div class="row-fluid">
+		<div class="span12">
+			<style>
+				select,input[type="text"],input[type="password"],input[type="number"]{margin-bottom:auto;}
+				table input[type="text"],input[type="password"],input[type="number"]{width: 130px;}
+				table select{width:auto;}
+				input[type="checkbox"]{margin: auto;}
+				label{margin-top: 5px;}
+			</style>
+			<form action="" style="margin:10px 0;padding:5px;border:1px solid #f5f5f5;">
+			<table width="100%" >
+				<colgroup>
+					<col width="30%" />
+					<col width="20%" />
+					<col width="20%" />
+					<col width="20%" />
+				</colgroup>
+				<tr align="left">
+					<td>角色&nbsp;&nbsp;<select name="roles" id="role" style="vertical-align: middle;"><option value='1'>管理员</option><option value='5'>普通用户</option><option value='6'>访问用户</option></select></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+
+    <div class="row-fluid">
+        <div class="span12">
+        	<form action="admin.php?op=servicemgr_controller&action=save" method="POST">
+                <div class="widget widget-tabs blue">
+                    <div class="widget-title">
+                        <h4><i class="icon-reorder"></i>权限管理控制</h4>
+                    </div>
+                    <div class="widget-body">
+                        <div class="tabbable ">
+                            <ul class="nav nav-tabs">
+                            									    <li class="active"><a href="#widget_tab1" data-toggle="tab">PBX配置分类</a></li>
+																    <li ><a href="#widget_tab2" data-toggle="tab">系统配置</a></li>
+																    <li ><a href="#widget_tab3" data-toggle="tab">系统维护</a></li>
+								                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="widget_tab1">
+									<table width="100%">
+										<tr><td><label for="change_01"><input type="checkbox" id="change_01" />全选</label></td></tr>
+																				<tr height="40px;"><td>分机配置</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_010101" class="change change_01"><input id='third_010101' type="checkbox" value="010101">分机管理</label></td>
+																																		<td><label for="third_010102" class="change change_01"><input id='third_010102' type="checkbox" value="010102">O口配置</label></td>
+																																		<td><label for="third_010103" class="change change_01"><input id='third_010103' type="checkbox" value="010103">S口配置</label></td>
+																																		</tr>
+																				<tr height="40px;"><td>补充业务</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_010201" class="change change_01"><input id='third_010201' type="checkbox" value="010201">呼叫前转</label></td>
+																																		<td><label for="third_010202" class="change change_01"><input id='third_010202' type="checkbox" value="010202">免打扰</label></td>
+																																		<td><label for="third_010203" class="change change_01"><input id='third_010203' type="checkbox" value="010203">彩铃</label></td>
+																																		<td><label for="third_010204" class="change change_01"><input id='third_010204' type="checkbox" value="010204">秘书</label></td>
+																																		<td><label for="third_010205" class="change change_01"><input id='third_010205' type="checkbox" value="010205">轮选组</label></td>
+																																		<td><label for="third_010206" class="change change_01"><input id='third_010206' type="checkbox" value="010206">缩位拨号</label></td>
+																																		<td><label for="third_010207" class="change change_01"><input id='third_010207' type="checkbox" value="010207">呼叫限制</label></td>
+																																		<td><label for="third_010208" class="change change_01"><input id='third_010208' type="checkbox" value="010208">黑白名单配置</label></td>
+																									</tr><tr height="40px;">
+																																		<td><label for="third_010209" class="change change_01"><input id='third_010209' type="checkbox" value="010209">自动话务员</label></td>
+																																		<td><label for="third_010210" class="change change_01"><input id='third_010210' type="checkbox" value="010210">代答业务</label></td>
+																																		<td><label for="third_010211" class="change change_01"><input id='third_010211' type="checkbox" value="010211">闹钟</label></td>
+																																		<td><label for="third_010212" class="change change_01"><input id='third_010212' type="checkbox" value="010212">业务功能码</label></td>
+																																		<td><label for="third_010213" class="change change_01"><input id='third_010213' type="checkbox" value="010213">群规则</label></td>
+																																		<td><label for="third_010214" class="change change_01"><input id='third_010214' type="checkbox" value="010214">一号通业务</label></td>
+																																		</tr>
+																				<tr height="40px;"><td>增值业务</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_010301" class="change change_01"><input id='third_010301' type="checkbox" value="010301">会议</label></td>
+																																		<td><label for="third_010302" class="change change_01"><input id='third_010302' type="checkbox" value="010302">语音邮箱</label></td>
+																																		<td><label for="third_010303" class="change change_01"><input id='third_010303' type="checkbox" value="010303">话单/录音查询</label></td>
+																																		<td><label for="third_010304" class="change change_01"><input id='third_010304' type="checkbox" value="010304">LDAP:通讯录</label></td>
+																																		<td><label for="third_010305" class="change change_01"><input id='third_010305' type="checkbox" value="010305">CTI</label></td>
+																																		</tr>
+																				<tr height="40px;"><td>常规配置</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_010402" class="change change_01"><input id='third_010402' type="checkbox" value="010402">语音文件管理</label></td>
+																																		<td><label for="third_010403" class="change change_01"><input id='third_010403' type="checkbox" value="010403">SIP配置</label></td>
+																																		<td><label for="third_010404" class="change change_01"><input id='third_010404' type="checkbox" value="010404">VOIP配置</label></td>
+																																		<td><label for="third_010409" class="change change_01"><input id='third_010409' type="checkbox" value="010409">拨号规则</label></td>
+																																		<td><label for="third_010405" class="change change_01"><input id='third_010405' type="checkbox" value="010405">号码变换配置</label></td>
+																																		<td><label for="third_010406" class="change change_01"><input id='third_010406' type="checkbox" value="010406">路由配置</label></td>
+																																		<td><label for="third_010407" class="change change_01"><input id='third_010407' type="checkbox" value="010407">AG相关业务</label></td>
+																																		<td><label for="third_010408" class="change change_01"><input id='third_010408' type="checkbox" value="010408">CDR</label></td>
+																									</tr><tr height="40px;">
+																																		<td><label for="third_010410" class="change change_01"><input id='third_010410' type="checkbox" value="010410">E1配置</label></td>
+																																		</tr>
+																			</table>
+                                </div>
+                                <div class="tab-pane" id="widget_tab2">
+									<table width="100%">
+										<tr><td><label for="change_02"><input type="checkbox" id="change_02" />全选</label></td></tr>
+																				<tr height="40px;"><td>安全</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_020101" class="change change_02"><input id='third_020101' type="checkbox" value="020101">主备配置</label></td>
+																																		<td><label for="third_020102" class="change change_02"><input id='third_020102' type="checkbox" value="020102">防火墙配置</label></td>
+																																		<td><label for="third_020103" class="change change_02"><input id='third_020103' type="checkbox" value="020103">页面管理</label></td>
+																																		<td><label for="third_020104" class="change change_02"><input id='third_020104' type="checkbox" value="020104">网管权限管理</label></td>
+																																		</tr>
+																				<tr height="40px;"><td>网络</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_020202" class="change change_02"><input id='third_020202' type="checkbox" value="020202">NTP</label></td>
+																																		<td><label for="third_020203" class="change change_02"><input id='third_020203' type="checkbox" value="020203">远程端口配置</label></td>
+																																		<td><label for="third_020204" class="change change_02"><input id='third_020204' type="checkbox" value="020204">网卡配置</label></td>
+																																		<td><label for="third_020205" class="change change_02"><input id='third_020205' type="checkbox" value="020205">PING测试</label></td>
+																																		<td><label for="third_020207" class="change change_02"><input id='third_020207' type="checkbox" value="020207">TR069功能</label></td>
+																																		<td><label for="third_020208" class="change change_02"><input id='third_020208' type="checkbox" value="020208">DMZ部署配置</label></td>
+																																		</tr>
+																				<tr height="40px;"><td>设备管理</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_020301" class="change change_02"><input id='third_020301' type="checkbox" value="020301">板卡信息</label></td>
+																																		<td><label for="third_020302" class="change change_02"><input id='third_020302' type="checkbox" value="020302">端口管理</label></td>
+																																		<td><label for="third_020303" class="change change_02"><input id='third_020303' type="checkbox" value="020303">许可信息</label></td>
+																																		</tr>
+																			</table>
+                                </div>
+                                <div class="tab-pane" id="widget_tab3">
+									<table width="100%">
+										<tr><td><label for="change_03"><input type="checkbox" id="change_03" />全选</label></td></tr>
+																				<tr height="40px;"><td>系统操作</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_030101" class="change change_03"><input id='third_030101' type="checkbox" value="030101">系统重启</label></td>
+																																		<td><label for="third_030107" class="change change_03"><input id='third_030107' type="checkbox" value="030107">定时重启</label></td>
+																																		<td><label for="third_030102" class="change change_03"><input id='third_030102' type="checkbox" value="030102">系统关机</label></td>
+																																		<td><label for="third_030105" class="change change_03"><input id='third_030105' type="checkbox" value="030105">系统升级</label></td>
+																																		</tr>
+																				<tr height="40px;"><td>日志管理</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_030201" class="change change_03"><input id='third_030201' type="checkbox" value="030201">系统日志设置</label></td>
+																																		<td><label for="third_030202" class="change change_03"><input id='third_030202' type="checkbox" value="030202">系统日志下载</label></td>
+																																		<td><label for="third_030203" class="change change_03"><input id='third_030203' type="checkbox" value="030203">操作日志查询</label></td>
+																																		<td><label for="third_030204" class="change change_03"><input id='third_030204' type="checkbox" value="030204">信令跟踪</label></td>
+																																		</tr>
+																				<tr height="40px;"><td>系统状态查询</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_030301" class="change change_03"><input id='third_030301' type="checkbox" value="030301">负荷查询</label></td>
+																																		<td><label for="third_030302" class="change change_03"><input id='third_030302' type="checkbox" value="030302">SIP资源</label></td>
+																																		</tr>
+																				<tr height="40px;"><td>数据备份与恢复</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_030401" class="change change_03"><input id='third_030401' type="checkbox" value="030401">备份文件信息</label></td>
+																																		<td><label for="third_030402" class="change change_03"><input id='third_030402' type="checkbox" value="030402">数据备份模式</label></td>
+																																		<td><label for="third_030403" class="change change_03"><input id='third_030403' type="checkbox" value="030403">数据恢复</label></td>
+																																		</tr>
+																				<tr height="40px;"><td>警告管理</td></tr>
+											<tr height="40px;">
+																						<td><label for="third_030501" class="change change_03"><input id='third_030501' type="checkbox" value="030501">当前告警</label></td>
+																																		<td><label for="third_030502" class="change change_03"><input id='third_030502' type="checkbox" value="030502">告警抑制</label></td>
+																																		</tr>
+																			</table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="roleStr" id="roleStr" value="0101,010101,010102,010103,0102,010201,010202,010203,010204,010205,010206,010207,010208,010209,010210,010211,010212,010213,010214,0103,010301,010302,010303,010304,010305,0104,010402,010403,010404,010409,010405,010406,010407,010408,010410,0201,020101,020102,020103,020104,0202,020202,020203,020204,020205,020207,020208,0203,020301,020302,020303,0301,030101,030107,030102,030105,0302,030201,030202,030203,030204,0303,030301,030302,0304,030401,030402,030403,0305,030501,030502"/>
+                <input type="hidden" name="curType" id="curType">
+                <input type="hidden" name="subflag" value="020104">
+                                <input class="btn btn-primary" type="submit" value="设置">
+                			</form>
+        </div>
+    </div>
+	<div style="height:80px;"></div>
+	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script>
+	$(function(){
+		$("label[for='change_01']").change(function() {
+			if($("#change_01").is(':checked')){
+				$(".change_01").children('input').attr('checked',true);
+			}else{
+				$(".change_01").children('input').attr('checked',false);
+			}
+			var roleStr = '';
+			$(".change").children('input:checked').each(function(index, el) {
+				roleStr += $(this).val()+','
+			});
+			$("#roleStr").val(roleStr.slice(0,-1))
+		});
+		$("label[for='change_02']").change(function() {
+			if($("#change_02").is(':checked')){
+				$(".change_02").children('input').attr('checked',true);
+			}else{
+				$(".change_02").children('input').attr('checked',false);
+			}
+			var roleStr = '';
+			$(".change").children('input:checked').each(function(index, el) {
+				roleStr += $(this).val()+','
+			});
+			$("#roleStr").val(roleStr.slice(0,-1))
+		});
+		$("label[for='change_03']").change(function() {
+			if($("#change_03").is(':checked')){
+				$(".change_03").children('input').attr('checked',true);
+			}else{
+				$(".change_03").children('input').attr('checked',false);
+			}
+			var roleStr = '';
+			$(".change").children('input:checked').each(function(index, el) {
+				roleStr += $(this).val()+','
+			});
+			$("#roleStr").val(roleStr.slice(0,-1))
+		});
+		$(".change").click(function() {
+			var roleStr = '';
+			$(".change").children('input:checked').each(function(index, el) {
+				roleStr += $(this).val()+','
+			});
+			$("#roleStr").val(roleStr.slice(0,-1))
+			allButton();
+		});
+		$("#role").change(function(event) {
+			var curType = $(this).val();
+			$("#curType").val(curType);
+			$.get("admin.php?op=servicemgr_controller&action=role",{'roleType':curType,'subflag':'020104'},function(data,textStatus){
+				var roleObj = data.split(',');
+				$(".change").children('input').each(function(index, el) {
+					if($.inArray($(this).val(),roleObj) != '-1'){
+						$(this).attr('checked',true);
+					}else{
+						$(this).attr('checked',false);
+					}
+				});
+				var roleStr = '';
+				$(".change").children('input:checked').each(function(index, el) {
+					roleStr += $(this).val()+','
+				});
+				$("#roleStr").val(roleStr.slice(0,-1))
+				allButton();
+			});	
+		}).change();
+	})
+
+	function allButton(){
+		var role01 = $(".change_01").length
+		var role02 = $(".change_02").length
+		var role03 = $(".change_03").length
+		var i=0;
+		var j=0;
+		var k=0;
+		$("input[id^='third_01']").each(function(){
+			if($(this).is(':checked')){
+				i++;
+			}
+		})
+		$("input[id^='third_02']").each(function(){
+			if($(this).is(':checked')){
+				j++;
+			}
+		})
+		$("input[id^='third_03']").each(function(){
+			if($(this).is(':checked')){
+				k++;
+			}
+		})
+		if(i==role01){
+			$("#change_01").attr('checked',true);
+		}else{
+			$("#change_01").attr('checked',false);
+		}
+		if(j==role02){
+			$("#change_02").attr('checked',true);
+		}else{
+			$("#change_02").attr('checked',false);
+		}
+		if(k==role03){
+			$("#change_03").attr('checked',true);
+		}else{
+			$("#change_03").attr('checked',false);
+		}
+	}
+
+</script>

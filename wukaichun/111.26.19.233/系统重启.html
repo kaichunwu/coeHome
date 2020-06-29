@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统维护.html" target="mainFrame">系统维护</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">系统重启</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="cn/css/metro/uniform.default.css" />
+<div class="row-fluid">
+    <div class="span12">
+		<form id="addFormData" name="formData" style="margin:10px 0;padding:5px;border:1px solid #f5f5f5;">
+			<table width="100%">
+				<colgroup>
+					<col width="60%" />
+					<col width="40%" />
+				</colgroup>
+				<tr>
+					<td>系统重启将需要几分钟时间，请点击“重启”按钮后等待重启！</td>
+					<td>
+					<input type="hidden" id="subflag" name="subflag" value="030101">
+					<input type="hidden" name="action" value="reboot">
+											
+					<span class="btn btn-primary" onclick="before_reboot()">重启</span>
+										</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<div id="ajaxMask" style="display:none;width:100%;height:100%;background-color:#000;position:absolute;top:0;left:0;z-index:10000;opacity:0.8;filter: alpha(opacity=80);">
+    <div style="top:45%;left:45%;width:125px;height:25px;position:absolute;z-index:10001; background-color:#FFFFFF;line-height:25px;text-align: center;">
+        <img src="cn/img/loading.gif" style="vertical-align:middle;"/> Loading...
+    </div>
+</div>	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script language="JavaScript">
+// <form name="form1" method="POST" style="margin:10px 0;padding:5px;border:1px solid #f5f5f5;" action="admin.php?op=sysmgr_systemreboot&action=reboot" onsubmit="return before_reboot();">
+function before_reboot(){
+	BootstrapDialog.confirm({
+        title: '警告',
+        message: '确定要重启系统吗？',
+		btnCancelLabel: '取消',
+        btnOKLabel: '确定',
+        callback:function(result){
+	        if(result) {
+			    $.ajax({
+			       type: "POST",
+			       url: "admin.php?op=sysmgr_systemreboot",
+			       data: $("#addFormData").serialize(),
+			       dataType:'json',
+			       success: function(res){
+			         if(res.code=='00'){
+			         	alert(res.text);
+			         	window.parent.location.href="index.php";
+			        }else{
+			            alert(res.text);
+			        }
+			       },
+			       error: function(XMLHttpRequest, textStatus, errorThrown) {
+			       		alert('error');
+						console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+				   }
+			    });
+	        }
+        }
+	})
+ }
+</script>

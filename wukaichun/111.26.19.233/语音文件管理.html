@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="cn/css/metro/uniform.default.css" />
+<style>
+#form1 td {
+	white-space: nowrap;
+}
+
+form[name=form1] td {
+	white-space: nowrap;
+}
+
+select {
+	margin-bottom: auto;
+}
+
+table input[type="text"], input[type="password"] {
+	width: auto;
+}
+
+table select {
+	width: auto;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="配置分类.html" target="mainFrame">PBX配置分类</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">语音文件管理</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><div class="row-fluid">
+  <div class="span12">
+        <div class="tabbable" style="padding:15px 0px;">
+          <ul class="nav nav-tabs" style="margin:0 auto;">
+            <li class="active"><a href="基本业务.html" target="tab1">基本业务</a></li>
+            <li><a href="admin.php?op=servicemgr_voiceexteninfo" target="tab1">补充业务</a></li>
+            <li><a href="admin.php?op=servicemgr_voicereginfo" target="tab1">业务登记</a></li>
+            <li><a href="admin.php?op=servicemgr_IVRvoiceinfo" target="tab1">IVR语音文件</a></li>
+<!--             <li><a href="admin.php?op=servicemgr_defaultrecovery" target="tab1">恢复默认</a></li>
+<li><a href="admin.php?op=servicemgr_voicecogradient" target="tab1">语音文件主备同步</a></li> -->
+          </ul>
+          <div class="tab-content">
+              <div class="tab-pane active">
+                  <iframe name="tab1" class="tabClass" id="tab1" src="基本业务.html" width="100%" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" height="500"></iframe>
+              </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+
+  function reinitIframe(){
+    var iframe = document.getElementById("tab1");
+    try{
+      var bHeight = iframe.contentWindow.document.body.scrollHeight;
+      var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+      var height = Math.min(bHeight, dHeight);
+      var wHeight = $(window).height()-200;
+      iframe.height = wHeight>height ? wHeight:height;
+    }catch (ex){}
+  }
+  window.setInterval(reinitIframe, 200);
+
+  $(".nav-tabs li").click(function(){
+    $(this).addClass("active").siblings().removeClass("active");
+  });
+
+}); 
+</script>
+	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script>

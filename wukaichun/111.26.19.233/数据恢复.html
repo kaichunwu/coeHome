@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统维护.html" target="mainFrame">系统维护</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">数据恢复</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div>
+	<div class="row-fluid">
+		<div class="span12">
+			<form name="form1" method="POST" enctype="multipart/form-data" action="admin.php?op=sysmgr_datarecovery&action=recovery" onsubmit="return checkFiletype();" style="margin:10px 0;padding:5px;border:1px solid #f5f5f5;">
+					<table width="100%">
+						<colgroup>
+							<col width="20%" />
+							<col width="40%" />
+							<col width="40%" />
+						</colgroup>
+						<tr>
+							<td>&nbsp;&nbsp;备份文件名称</td>
+							<td><input type="file" id="bakfile" name="bakfile" style="width:360px;" value="" /></td>
+							<td>
+														<input type="submit" id="btnRecovery" class="btn btn-primary" value='恢复'/>
+														<input type="hidden" id="subflag" name="subflag" value="030403">
+							</td>
+						</tr>
+					</table>
+			</form>
+		</div>
+	</div>
+
+	<div class="row-fluid" style="display:none;">
+		<div class="span12">
+			<form name="form2" method="POST" action="admin.php?op=sysmgr_datarecovery&action=rollback" onsubmit="return checkConfirmed();" style="margin-bottom:initial;">
+				<table width="100%">
+					<tr>
+						<td >
+												<input id="btnRollback" type="submit" class="btn btn-primary" value='数据回滚'/>
+												<input type="hidden" id="subflag" name="subflag" value="030403">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	
+	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script language="JavaScript">
+function before_Recovery(){
+   var is_confirmed=confirm("恢复数据过程中，请不要进行其他操作，确定恢复吗？");
+   if(is_confirmed){
+      return true;
+   }else{
+      return false;
+   }
+ }
+function before_Rollback(){
+   var is_confirmed=confirm("回滚数据过程中，请不要进行其他操作，确定回滚吗？");
+   if(is_confirmed){
+      return true;
+   }else{
+      return false;
+   }
+ }
+function checkFiletype(){
+	var path=$("#bakfile").val();
+	//var list1=path.split(".");
+    //var filetype=list1[list1.length-1]
+    var filetype=path.indexOf(".tar.gz");
+    if(filetype==-1){
+	//if(filetype!="sql"){
+		alert("导入文件类型为tar.gz文件，请重试！");
+		return false;
+	}
+	var is_confirmed=confirm("恢复数据过程中，请不要进行其他操作，确定恢复吗？");
+ 	if(is_confirmed){
+ 		$("#btnRecovery").attr("disabled","disabled");
+ 		$("#btnRollback").attr("disabled","disabled");
+      	return true;
+   	}else{
+      	return false;
+   	}
+	
+	
+}
+function checkConfirmed(){
+   var is_confirmed=confirm("此操作会使系统数据恢复到之前的某个版本，是否继续？");
+   if(is_confirmed){
+	   var is_confirmed2=confirm("回滚数据过程中，请不要进行其他操作，确定回滚吗？");
+	   if(is_confirmed2){
+		   	$("#btnRecovery").attr("disabled","disabled");
+			$("#btnRollback").attr("disabled","disabled");
+	      	return true;
+	   }else{
+	      	return false;
+	   }
+   }else{
+      	return false;
+   }
+}
+</script>

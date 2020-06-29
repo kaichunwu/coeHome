@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+select{margin-bottom:auto;}
+table input[type="text"],input[type="password"]{width: auto;}
+table select{width:auto;}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="配置分类.html" target="mainFrame">PBX配置分类</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">代答业务</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><div class="row-fluid">
+	<div class="span12">
+        <div class="tabbable" style="padding:15px 0px;">
+            <ul class="nav nav-tabs" style="margin:0 auto;">
+                <li class="active"><a href="admin.php?op=servicemgr_pickupgrpinfo" target="tab1">代答组</a></li>
+                <li><a href="admin.php?op=servicemgr_pickupgrpuserinfo" target="tab1">代答组用户</a></li>
+            </ul>
+            <div class="tab-content">
+<script language="JavaScript">
+function before_delete(id){
+	BootstrapDialog.confirm({
+        title: '警告',
+        message: '确定要删除吗？',
+		btnCancelLabel: '取消',
+        btnOKLabel: '确定',
+        callback:function(result){
+	        if(result) {
+			    $.ajax({
+			       type: "POST",
+			       url: "admin.php?op=servicemgr_pickupgrpinfo",
+			       data: 'action=del&chknum='+id,
+			       dataType:'json',
+			       success: function(res){
+			         if(res.code=='00'){
+			         	alert(res.text);
+			            location.href = 'admin.php?op=servicemgr_pickupgrpinfo&action=query&grpNo=&page=1&subflag=';
+			        }else{
+			            alert(res.text);
+			        }
+			       },
+			       error: function(XMLHttpRequest, textStatus, errorThrown) {
+			       		alert('error');
+						console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+				   }
+			    });
+	        }
+        }
+	})
+ }
+function doUserEdit(value){
+	var subflag = $("#subflag").val();
+	BootstrapDialog.show({
+		title: '修改',
+		size: BootstrapDialog.SIZE_NORMAL,
+		message:$('<div></div>').load('admin.php?op=servicemgr_pickupgrpinfomodify&qgrpNo=&qpage=1&subflag='+subflag+'&chknum='+value),
+        draggable:true
+	});
+}
+function jump(pagenum)
+{
+	var gotoPage=document.formJump.gotoPage.value;
+	if(gotoPage==""||gotoPage=="0"||isNaN(gotoPage)||parseInt(gotoPage)>parseInt(pagenum)){
+		alert("请输入合法的页码再点击跳转！");
+		return false;
+	}
+	document.formJump.page.value=gotoPage;
+	document.formJump.submit();    
+} 
+
+function doPageJumpEvent(maxPage) {
+	var goPage = $("#gotoPage").val(); 
+	if (isValidPage(goPage, maxPage)) {
+		doPageEvent(goPage);
+	}
+}
+
+function doPageEvent(iPage) {
+	document.formJump.page.value=iPage;
+	document.formJump.submit(); 
+} 
+
+$(function(){
+	$("#btnAdd").click(function(){
+		var subflag=$("#subflag").val();
+		BootstrapDialog.show({
+			title: '添加',
+			size: BootstrapDialog.SIZE_NORMAL,
+			message:$('<div></div>').load('admin.php?op=servicemgr_pickupgrpinfoadd&qgrpNo=&qpage=1&subflag='+subflag),
+	        draggable:true
+		});
+	});
+});
+</script>
+
+		<div class="row-fluid">
+			<div class="span12">
+			<style>
+				select,input[type="text"]{margin-bottom:initial;}
+				table input[type="text"],input[type="password"]{width: 130px;}
+				table select{width:auto;}
+			</style>
+				<form name="form1" method="POST" style="margin:10px 0;padding:5px;border:1px solid #f5f5f5;" action="admin.php?op=servicemgr_pickupgrpinfo&action=query">
+					<table width="100%">
+						<tr>
+							<td style="padding-left: 8px;">组号&nbsp;&nbsp;<input style="width:auto;" type="text" name="grpNo" value="" />&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value='查询' /><input type="hidden" id="subflag" name="subflag" value=""></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+
+		<div class="row-fluid">
+		    <div class="span12">
+
+	        <table class="table table-striped table-bordered table-advance table-hover">
+		        <thead>
+				 <tr>
+		            <th style="text-align: center;">组号</th>
+		            <th style="text-align: center;">组名称</th>
+		            <th style="text-align: center;">操作</th>
+				 </tr>
+				</thead>
+				<tbody>		
+				 				 </tbody>
+		 	</table>
+
+			<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table140" height="25" style="margin-top:10px;">
+			  <form name="formJump" method="post" action="admin.php?op=servicemgr_pickupgrpinfo&action=turn">
+			  <tr>
+			  				  	 <td>
+			  	 	<span class="btn btn-primary" id="btnAdd">添加</span>
+					&nbsp;
+			  	 </td>
+			  	 			     <td valign="middle" align="right">
+			     记录数：0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页：10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页：<input type="text" id="gotoPage" maxlength="5" value="1" class="ui-widget ui-widget-content ui-corner-all">&nbsp;/&nbsp;0&nbsp;
+			     <input type="button" value="跳转" class="btn btn-primary" onclick="jump(0)" role="button" aria-disabled="false">&nbsp;&nbsp;&nbsp;
+			     <input type="button" value="&lt;&lt;" title="首页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(1)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;<input type="button" value="&lt;" title="上一页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(0)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;<input type="button" value="&gt;" title="下一页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(2)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;<input type="button" value="&gt;&gt;" title="尾页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(0)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;
+			     </td>
+			     	<input type="hidden" name="grpNo" value="">
+			  		<input type="hidden" id="subflag" name="subflag" value="">
+			  	 	<input type="hidden" name="page" value="">
+			  </tr>
+			  </form>
+			</table>
+			</div>
+		</div>
+<div style="height:40px;"></div>
+	<script type="text/javascript" src="cn/jscript/metro/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript">
+	$(document).bind('mousewheel DOMMouseScroll', function(e) { 
+		var offset = $(window.parent.document).scrollTop();
+	    var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
+	                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
+	    if (delta > 0) {
+	        $(window.parent).scrollTop(offset-40); // 向上滚
+	    } else if (delta < 0) {
+	        $(window.parent).scrollTop(parseInt(offset)+parseInt(40)); // 向下滚
+	    }
+	});
+</script>
+
+            </div>
+        </div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+  function reinitIframe(){
+    var iframe = document.getElementById("tab1");
+    try{
+      var bHeight = iframe.contentWindow.document.body.scrollHeight;
+      var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+      var height = Math.min(bHeight, dHeight);
+      var wHeight = $(window).height()-200;
+      iframe.height = wHeight>height ? wHeight:height;
+    }catch (ex){}
+  }
+  window.setInterval(reinitIframe, 200);
+
+  $(".nav-tabs li").click(function(){
+    $(this).addClass("active").siblings().removeClass("active");
+  });
+
+});	
+</script>
+	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script>

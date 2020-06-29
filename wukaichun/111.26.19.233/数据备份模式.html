@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统维护.html" target="mainFrame">系统维护</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">数据备份模式</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><style>
+	.even-row{background-color:#DFEFFC;}
+	.odd-row{background-color:#F5F8F9;}
+	select,input[type="text"]{margin-top: 10px;}
+</style>
+	<div class="row-fluid">
+		<div class="span12">  
+			<form id="addFormData" name="formData">
+				<table width="100%" style="margin-top:10px;">
+					<tr>
+						<td>
+							<table width="100%" class="data-table1" border="0" cellpadding="0" cellspacing="0">
+						    	<colgroup><col width="20%">
+						            <col width="80%">
+						        </colgroup>
+						        <tbody>			        
+						        <tr height="25px" class="even-row">
+						        	<td style="padding-left: 15px;">数据备份计划</td>
+						            <td><select id="bakplan" name="bakplan"><option value='0'>按天</option><option value='1' selected>按周</option><option value='2'>按月</option></select>
+						            </td>
+						        </tr>
+						        <tr id="databakDate" height="25px" class="odd-row">
+						        	<td style="padding-left: 15px;">数据备份日期</td>
+						            <td><input type="text" id="bakdate" name="bakdate" maxlength="14" value="">
+						            &nbsp;<span style="color:green">若设置按周备份，则其范围为1-7；若设置按月备份，则其范围为1-31；可用“|”隔开填写多个时段</span>
+						            </td>
+						        </tr>
+						        <tr height="25px" class="even-row">
+						        	<td style="padding-left: 15px;">数据备份时间</td>
+						            <td><input type="text" id="baktime" name="baktime" maxlength="14" value="2000">
+						            &nbsp;<span style="color:green">格式：1200,表示12:00</span>
+						            </td>
+						        </tr>
+						        <tr height="25px" class="odd-row">
+						        	<td style="padding-left: 15px;">数据备份状态</td>
+						            <td><select id="bakstatus" name="bakstatus"><option value='0'>停止周期性数据导出</option><option value='1' selected>开始周期性数据导出</option></select>
+						            </td>
+						        </tr>
+						        <!--<tr height="25px" class="even-row">
+						        	<td>FTP的IP地址</td>
+						            <td><input type="text" id="ftpIP" name="ftpIP" maxlength="14" value="" class="ui-widget ui-widget-content ui-corner-all">
+						            &nbsp;<span style="color:green"></span>
+						            </td>
+						        </tr>
+						        <tr height="25px" class="odd-row">
+						        	<td>FTP的端口号</td>
+						            <td><input type="text" id="ftpPort" name="ftpPort" maxlength="14" value="" class="ui-widget ui-widget-content ui-corner-all">
+						            &nbsp;<span style="color:green"></span>
+						            </td>
+						        </tr>-->
+								</tbody>
+							</table>
+						</td>
+					</tr>
+					<tr height="10">
+						<td>
+						<input type="hidden" name="subflag" value="030402">
+						<input type="hidden" id="chked" name="chked" value="1">
+						<input type="hidden" id="hidbakday" name="hidbakday" value="">
+						<input type="hidden" id="hidbakweek" name="hidbakweek" value="1|2|3|4|5|6|7">
+						</td>
+					</tr>
+										<tr>
+				        <td>
+				        	<span id="period" class="btn btn-primary">周期性配置</span>
+				        	&nbsp;
+							<span id="manual" class="btn btn-primary">手动备份</span>
+				        	&nbsp;
+				        </td>
+				    </tr>
+				    				</table>
+			</form>	
+		</div>
+	</div>
+	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script language="javascript">
+function checkData() {
+	if($("#bakplan").val()=="1"){
+		if(!isWeek($("#bakdate").val())){
+			$("#bakdate").focus();
+			alert("数据备份日期不合法，请重试！");
+			return false;
+		}
+	}else if($("#bakplan").val()=="2"){
+		if(!isMonth($("#bakdate").val())){
+			$("#bakdate").focus();
+			alert("数据备份日期不合法，请重试！");
+			return false;
+		}
+	}
+	if(!isTimeHM($("#baktime").val())){
+		$("#baktime").focus();
+		alert("数据备份时间不合法，请重试！");
+		return false;
+	}
+	return true;
+}
+$(function(){
+	$("#bakdate").attr("disabled",$("#chked").val()=="0"?true:false);
+	$("#chked").val()=="0"?$("#bakdate").val(""):$("#bakdate").val($("#bakplan").val()=="1"?$("#hidbakweek").val():$("#hidbakday").val());
+	$("#bakplan").change(function(){
+		if($("#bakplan").val()=="0"){
+// 			$("#bakdate").val("");
+// 			$("#bakdate").attr("disabled",true);
+			$("#databakDate").attr('style','display: none;');			//结束时间隐藏
+		}else{
+			$("#databakDate").removeAttr('style');			//结束时间显示
+			$("#bakdate").val($("#bakplan").val()=="1"?$("#hidbakweek").val():$("#hidbakday").val());
+			$("#bakdate").attr("disabled",false);
+		}
+	});
+
+	$("#period").click(function(){
+		if(checkData()){
+            $.ajax({
+               type: "POST",
+               url: "admin.php?op=sysmgr_databakmode&action=modify",
+               data: $("#addFormData").serialize(),
+               dataType:'json',
+                beforeSend: function () {
+                   ShowLoading();
+                },
+                complete: function () {
+                    HiddenLoading();
+                },
+               success: function(res){
+                if(res.code=='00'){
+                    alert(res.text);
+                    location.href = 'admin.php?op=sysmgr_databakmode&action=query&subflag=030402';
+                }else{
+                    alert(res.text);
+                }
+               },
+               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert('error');
+                    console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+               }
+            });
+		}else{
+			return;
+		}
+/*		document.form1.action+="&action=modify";
+		if(checkData()){
+			document.form1.submit();
+		}*/
+	});
+	$("#manual").click(function(){
+		if(checkData()){
+ 			location.href = 'admin.php?op=sysmgr_databakmode&action=backup&subflag=030402';
+		}else{
+			return;
+		}
+/*		//alert(document.form1.action);
+		document.form1.action+="&action=backup";
+		//alert(document.form1.action);
+		document.form1.submit();*/
+	});
+});
+</script>

@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统配置.html" target="mainFrame">系统配置</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">NTP</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><link rel="stylesheet" type="text/css" href="cn/css/metro/bootstrap-datetimepicker.min.css" />
+<link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="cn/css/metro/uniform.default.css" />
+<div class="row-fluid">
+    <div class="span12">
+	<style>
+	.even-row{background-color:#DFEFFC;}
+	.odd-row{background-color:#F5F8F9;}
+	textarea,select,input[type="text"]{margin-top: 10px;}
+	input[type="radio"]{margin:initial;}
+	</style>
+	<form id="addFormData" name="formData">
+		<table width="100%" style="margin-top:10px;">
+			<tr>
+				<td>
+					<table width="100%" class="data-table1" border="0" cellpadding="0" cellspacing="0">
+				    	<colgroup>
+				    		<col width="20%" />
+							<col width="35%" />
+							<col width="40%" />
+				        </colgroup>
+				        <tbody>
+				        <tr height="25px" class="even-row">
+				        	<td style="padding-left: 15px;">时区的设定</td>
+				            <td>
+								<select size="1" id="tz" name="tz">
+								<option value="/usr/share/zoneinfo/US/Samoa">GMT-11:00 (Midway Island, Samoa)</option>
+								<option value="/usr/share/zoneinfo/US/Hawaii">GMT-10:00 (US Hawaii Time)</option>
+								<option value="/usr/share/zoneinfo/US/Alaska">GMT-9:00 (US Alaska Time)</option>
+								<option value="/usr/share/zoneinfo/America/Los_Angeles">GMT-8:00 (US Pacific Time, Los Angeles)</option>
+								<option value="/usr/share/zoneinfo/America/Denver">GMT-7:00 (US Mountain Time, Denver)</option>
+								<option value="/usr/share/zoneinfo/America/Chicago">GMT-6:00 (US Central Time, Chicago)</option>
+								<option value="/usr/share/zoneinfo/America/New_York">GMT-5:00 (US Eastern Time, New York)</option>
+								<option value="/usr/share/zoneinfo/Atlantic">GMT-4:00 (Atlantic Time, Quebec)</option>
+								<option value="/usr/share/zoneinfo/Atlantic/Azores">GMT-1:00 (Azores, Cape Verdi Is.)</option>
+								<option value="/usr/share/zoneinfo/Europe/London">GMT (London, Dublin, Edinburgh, Lisbon,Casablanca, Monrovia)</option>
+								<option value="/usr/share/zoneinfo/Europe/Paris">GMT+1:00 (Paris, Amsterdam, Berlin, Rome,Vienna, Madrid, Warsaw)</option>
+								<option value="/usr/share/zoneinfo/Israel">GMT+2:00 (Israel, Cairo, Athens, Helsinki,Istanbul,Buchrest)</option>
+								<option value="/usr/share/zoneinfo/Europe/Moscow">GMT+3:00 (Moscow, Kuwait, Baghdad, Tehran,Nairobi)</option>
+								<option value="/usr/share/zoneinfo/Asia/Baku">GMT+4:00 (Abu Dhabi, Baku)</option>
+								<option value="/usr/share/zoneinfo/Asia/Karachi">GMT+5:00 (Islamabad, Ekaterinburg, Karachi,Tashkent)</option>
+								<option value="/usr/share/zoneinfo/Asia/Kolkata">GMT+5:30 (Calcutta, Kolkata)</option>
+								<option value="/usr/share/zoneinfo/Asia/Almaty">GMT+6:00 (Almaty, Astana, Dhaka, Novosibirsk)</option>
+								<option value="/usr/share/zoneinfo/Asia/Jakarta">GMT+7:00 (Bankok, Jakarta, Hanoi, Krasnoyarsk)</option>
+								<option value="/usr/share/zoneinfo/Asia/Shanghai">GMT+8:00 (北京,新加坡,台北,吉隆坡, 伊尔库次克, 佩思)</option>
+								<option value="/usr/share/zoneinfo/Japan">GMT+9:00 (Japan, Korea, Yakutsk)</option>
+								<option value="/usr/share/zoneinfo/Australia/Sydney">GMT+10:00 (Brisbane, Sydney, Melbourne, Canberra, Guam, 
+								Hobart)</option>
+								<option value="/usr/share/zoneinfo/Asia/Magadan">GMT+11:00 (Magadan, Solomon Is., New Caledonia)</option>
+								<option value="/usr/share/zoneinfo/Pacific/Fiji">GMT+12:00 (Auckland, Wellington, Fiji)</option>
+								</select>
+				            </td>
+				            <td><span class="btn btn-primary" onclick="btnSetClick()">设置</span></td>
+				        </tr>
+				        <tr height="25px" class="odd-row">
+				        	<td style="padding-left: 15px;">NTP服务器地址</td>
+				            <td><input type="text" name="ntpIP" value="# List of servers used for initial synchronization.
+" /></td>
+				            <td><span class="btn btn-primary" onclick="btnModifyClick()">设置</span></td>
+				        </tr>
+				        <tr height="25px" class="even-row">
+				        	<td style="padding-left: 15px;">手动设置时间</td>
+				            <td>
+								<div id="TIME" class="input-append date form_datetime">
+								    <input style="width:auto;" type="text" name="TIME" value="2018-08-02 10:49:30" readonly>
+								    <span style="margin-top:10px;" class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+				            </td>
+				            <td><span class="btn btn-primary" onclick="btnConfirmClick()">确定</span></td>
+				        </tr>
+				        <tr height="25px" class="odd-row">
+				        	<td style="padding:10px 0 10px 15px;">NTP服务器使能</td>
+				            <td><input type="radio" value="1" name="ntpstatus">启动&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="ntpstatus" value="0">关闭
+				            </td>
+				            <td><span class="btn btn-primary" onclick="btnNtpStatusModifyClick()">确定</span></td>
+				        </tr>
+						</tbody>
+						<input type="hidden" name="subflag" value="020202">
+					</table>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+</div>
+<div id="ajaxMask" style="display:none;width:100%;height:100%;background-color:#000;position:absolute;top:0;left:0;z-index:10000;opacity:0.8;filter: alpha(opacity=80);">
+    <div style="top:45%;left:45%;width:125px;height:25px;position:absolute;z-index:10001; background-color:#FFFFFF;line-height:25px;text-align: center;">
+        <img src="cn/img/loading.gif" style="vertical-align:middle;"/> Loading...
+    </div>
+</div>	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script type="text/javascript" src="cn/jscript/metro/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="cn/jscript/metro/locales/bootstrap-datetimepicker.fr.js"></script>
+<script language="javascript">
+var ntpradio=document.getElementsByName("ntpstatus");
+selectRadio(ntpradio, '0');
+var tzoption=document.getElementById("tz");
+//selectOption(tzoption,'/usr/share/zoneinfo/Asia/Shanghai');
+$("#tz").val('/usr/share/zoneinfo/Asia/Shanghai');
+
+if('0'=='1'){
+	if('empty'=='同步操作成功')
+	  parent.window.document.bottomFrame.document.location.reload();
+}
+
+function btnConfirmClick(){
+	time=$("input[name='TIME']").val();
+	if(!time){
+	  alert("请输入日期时间！");
+	}else{
+		BootstrapDialog.confirm({
+	        title: '警告',
+	        message: '点击确定，重新登陆管理界面，时间设置生效。',
+			btnCancelLabel: '取消',
+	        btnOKLabel: '确定',
+	        callback:function(result){
+		        if(result) {
+				    $.ajax({
+				       type: "POST",
+				       url: "admin.php?op=servicemgr_ntpinfo&action=confirm",
+				       data: $("#addFormData").serialize(),
+				       dataType:'json',
+				        beforeSend: function () {
+				           ShowLoading();
+				        },
+				        complete: function () {
+				            HiddenLoading();
+				        },
+				       success: function(res){
+				         if(res.code=='00'){
+				         	alert(res.text);
+				            location.href = 'admin.php?op=servicemgr_ntpinfo&subflag=020202';
+				        }else{
+				            alert(res.text);
+				        }
+				       },
+				       error: function(XMLHttpRequest, textStatus, errorThrown) {
+				       		alert('error');
+							console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+					   }
+				    });
+		        }
+	        }
+		})
+	}
+}
+function btnNtpStatusModifyClick(){
+    $.ajax({
+       type: "POST",
+       url: "admin.php?op=servicemgr_ntpinfo&action=ntpstatusmodify",
+       data: $("#addFormData").serialize(),
+       dataType:'json',
+        beforeSend: function () {
+           ShowLoading();
+        },
+        complete: function () {
+            HiddenLoading();
+        },
+       success: function(res){
+         if(res.code=='00'){
+         	alert(res.text);
+            location.href = 'admin.php?op=servicemgr_ntpinfo&subflag=020202';
+        }else{
+            alert(res.text);
+        }
+       },
+       error: function(XMLHttpRequest, textStatus, errorThrown) {
+       		alert('error');
+			console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+	   }
+    });
+}
+function btnModifyClick(){
+    $.ajax({
+       type: "POST",
+       url: "admin.php?op=servicemgr_ntpinfo&action=modify",
+       data: $("#addFormData").serialize(),
+       dataType:'json',
+        beforeSend: function () {
+           ShowLoading();
+        },
+        complete: function () {
+            HiddenLoading();
+        },
+       success: function(res){
+         if(res.code=='00'){
+         	alert(res.text);
+            location.href = 'admin.php?op=servicemgr_ntpinfo&subflag=020202';
+        }else{
+            alert(res.text);
+        }
+       },
+       error: function(XMLHttpRequest, textStatus, errorThrown) {
+       		alert('error');
+			console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+	   }
+    });
+}
+function btnSetClick(){
+	BootstrapDialog.confirm({
+        title: '警告',
+        message: '点击确定，重新登陆管理界面，时区设置生效。',
+		btnCancelLabel: '取消',
+        btnOKLabel: '确定',
+        callback:function(result){
+	        if(result) {
+			    $.ajax({
+			       type: "POST",
+			       url: "admin.php?op=servicemgr_ntpinfo&action=set",
+			       data: $("#addFormData").serialize(),
+			       dataType:'json',
+			        beforeSend: function () {
+			           ShowLoading();
+			        },
+			        complete: function () {
+			            HiddenLoading();
+			        },
+			       success: function(res){
+			         if(res.code=='00'){
+			         	alert(res.text);
+			            location.href = 'admin.php?op=servicemgr_ntpinfo&subflag=020202';
+			        }else{
+			            alert(res.text);
+			        }
+			       },
+			       error: function(XMLHttpRequest, textStatus, errorThrown) {
+			       		alert('error');
+						console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+				   }
+			    });
+	        }
+        }
+	})
+}
+$(function(){
+	$('#TIME').datetimepicker({
+		format: 'yyyy-mm-dd hh:ii:ss',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 0,
+		minuteStep: 1,
+		forceParse: 0
+	});
+})
+</script>

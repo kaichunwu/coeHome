@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统配置.html" target="mainFrame">系统配置</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">DMZ部署配置</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="cn/css/metro/uniform.default.css" />
+<div class="row-fluid">
+    <div class="span12">
+	<style>
+	.even-row{background-color:#DFEFFC;}
+	.odd-row{background-color:#F5F8F9;}
+	textarea,select,input[type="text"]{margin-top: 10px;}
+	input[type="radio"]{margin:initial;}
+	</style>
+	<form id="addFormData" name="formData" method="POST" action="admin.php?op=servicemgr_DMZsetinfo&action=set" style="margin:initial;">
+		<table width="100%" style="margin-top:10px;">
+			<tr>
+				<td>
+					<table class="data-table1" width="100%" border="0" cellpadding="0" cellspacing="0">
+				    	<colgroup><col width="20%">
+				           <col width="80%">
+				        </colgroup>
+				        <tbody>
+				        <tr height="25px" class="even-row">
+				        	<td style="padding-left: 15px;">启用状态</td>
+				            <td><select id="status" name="status" onchange="change();" ><option value='0'>关闭</option><option value='1' selected>开启</option></select></td>
+				        </tr>
+				        <tr id="NetIPstr" height="25px" class="odd-row">
+				        	<td style="padding-left: 15px;">NAT外网IP设置</td>
+				            <td><input type="text" id="NetIP" name="NetIP" value="111.26.19.233:5060"><span style="color:green">&nbsp;&nbsp;格式:127.0.0.1:5060</span></td>
+				        </tr>
+				    	</tbody>
+				    </table>
+				</td>
+			</tr>
+		</table>  
+		<input type="hidden" name="subflag" value="020208">
+	</form>
+	        <div style="width:100%;text-align: left;margin-top:10px;">
+            <span id="setBtn" class="btn btn-primary" onclick="confirmBut()">设置</span>
+        </div>
+    	</div>
+</div>
+<div id="ajaxMask" style="display:none;width:100%;height:100%;background-color:#000;position:absolute;top:0;left:0;z-index:10000;opacity:0.8;filter: alpha(opacity=80);">
+    <div style="top:45%;left:45%;width:125px;height:25px;position:absolute;z-index:10001; background-color:#FFFFFF;line-height:25px;text-align: center;">
+        <img src="cn/img/loading.gif" style="vertical-align:middle;"/> Loading...
+    </div>
+</div>	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script language="javascript">
+$(function(){
+	 var status=$("#status").val();
+// 		alert(status);
+	if(status == "0"){
+		$("#NetIPstr").attr('style','display: none;');		
+	}else{
+		$("#NetIPstr").removeAttr('style');		
+   }
+});
+function change(){
+	 var status=$("#status").val();
+	if(status=="0"){
+	$("#NetIPstr").attr('style','display: none;');		
+	}else{
+    $("#NetIPstr").removeAttr('style');		
+   }
+}
+//检查IP格式：
+function confirmBut(f) {	//advancedmgr_DMZsetinfo
+	var NatIP=$("#NetIP").val();
+	if(NatIP.length>0){
+		var list=NatIP.split(":");
+		if(list.length==2){
+			if(!isIp(list[0])||!isNumber(list[1])){
+			alert("NAT外网的IP地址和端口不合法，请重新输入！");
+			$("#NetIP").focus();
+			return false;
+			}
+		}else{
+			alert("NAT外网的IP地址和端口不合法，请重新输入！");
+			$("#NetIP").focus();
+			return false;
+		}
+	}
+	$("#addFormData").submit();
+	return true;
+}
+
+</script>

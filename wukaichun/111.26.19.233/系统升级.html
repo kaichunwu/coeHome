@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统维护.html" target="mainFrame">系统维护</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">系统升级</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="cn/css/metro/uniform.default.css" />
+		<div class="row-fluid">
+		    <div class="span12">
+				<style>
+					select,input[type="text"]{margin-bottom:initial;}
+					table input[type="text"],input[type="password"]{width: 130px;}
+					table select{width:auto;}
+				</style>
+				<form id="uploadForm" method="POST" style="margin:10px 0;padding:5px;border:1px solid #f5f5f5;" enctype="multipart/form-data">
+					<table width="100%">
+						<colgroup>
+							<col width="20%" />
+							<col width="40%" />
+							<col width="10%" />
+							<col width="30%" />
+						</colgroup>
+						<tr>
+							<td rowspan="3">&nbsp;&nbsp;请选择文件：</td>
+							<td rowspan="3"><input type="file" id="impfile" name="impfile" style="width:360px;" value=""></td>
+							<td rowspan="3">
+							<input type="hidden" id="subflag" name="subflag" value="030105">
+							<input type="hidden" name="action" value="upload">
+															<span class="btn btn-primary" onclick="checkFiletype()">上传</span>
+														</td>
+							<td><font color="Red">当前通信服务版本号：TPXS10L01-UC1000R300C00</font></td>
+						</tr>
+						<tr>							
+							<td><font color="Red">当前系统软件版本号：ICTS10-V10R200C00SPC024</font></td>
+						</tr>
+						<tr>
+							<td><font color="Red">当前web服务版本号：ICTS10-V10R200C00SPC024</font></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+
+	    <div class="row-fluid">
+	        <div class="span12">
+	            <table class="table table-striped table-bordered table-advance table-hover">
+	                <thead>
+	                <tr>
+	                    <th style="text-align: center;">软件名称</th>
+	                    <th style="text-align: center;">软件版本号（通信服务/系统软件/web服务）</th>
+	                    <th style="text-align: center;">上传时间</th>
+	                    <th style="text-align: center;">md5</th>
+	                    	                    <th style="text-align: center;">操作</th>
+	                    	                </tr>
+	                </thead>
+	                <tbody>
+	                	                <tr>
+					  	 <td style="text-align: center;">TPXS10-UC1000R300C00SPC004.tar.gz</td>	
+						 <td style="text-align: center;">TPXS10L01-UC1000R300C00/TPXS10-UC1000R300C00SPC004/?></td>	
+						 <td style="text-align: center;">2018-05-07 19:06:35</td>	
+						 <td style="text-align: center;">e8aa0359a44e752e9151df73a4a072fa</td>	
+	                    <td style="text-align: center;width: 90px;">
+	                    		                        <button title="系统升级" class="btn btn-inverse" onclick="return before_upgrade('TPXS10-UC1000R300C00SPC004.tar.gz');"><i class="icon-magic"></i></button>
+	                        <button class="btn btn-danger" onclick="before_delete('TPXS10-UC1000R300C00SPC004.tar.gz');"><i class="icon-remove icon-white"></i></button>
+	                        	                    </td>
+	                </tr>
+	                	                </tbody>
+	            </table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table140" height="25" style="margin-top:2px;">
+				  <form name="formJump" method="post" action="admin.php?op=sysmgr_systemupgrade&action=turn">
+				  <tr height="50px;">
+				  	<td valign="middle" align="right">
+				     记录数：1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页：10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页：<input type="text" id="gotoPage" maxlength="5" value="1" class="ui-widget ui-widget-content ui-corner-all">&nbsp;/&nbsp;1&nbsp;
+				     <input type="button" value="跳转" class="btn btn-primary" onclick="jump(1)" role="button" aria-disabled="false">&nbsp;&nbsp;&nbsp;
+				     <input type="button" value="&lt;&lt;" title="首页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(1)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;<input type="button" value="&lt;" title="上一页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(0)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;<input type="button" value="&gt;" title="下一页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(2)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;<input type="button" value="&gt;&gt;" title="尾页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(1)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;
+				     </td>
+				  </tr>
+				  <input type="hidden" id="subflag" name="subflag" value="030105">
+				  <input type="hidden" name="page" value="1">
+				  </form>
+				</table>
+	        </div>
+	    </div>
+
+<div style="height:80px;"></div>
+<div id="ajaxMask" style="display:none;width:100%;height:100%;background-color:#000;position:absolute;top:0;left:0;z-index:10000;opacity:0.8;filter: alpha(opacity=80);">
+    <div style="top:45%;left:45%;width:125px;height:25px;position:absolute;z-index:10001; background-color:#FFFFFF;line-height:25px;text-align: center;">
+        <img src="cn/img/loading.gif" style="vertical-align:middle;"/> Loading...
+    </div>
+</div>	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script language="JavaScript">
+function before_delete(file){
+	BootstrapDialog.confirm({
+        title: '警告',
+        message: '确定要删除吗？',
+		btnCancelLabel: '取消',
+        btnOKLabel: '确定',
+        callback:function(result){
+	        if(result) {
+				$.ajax({  
+				  url: 'admin.php?op=sysmgr_systemupgrade' ,  
+				  type: 'POST',  
+				  data: 'action=del&chkname='+file+'&subflag=030105',
+				  dataType:'json',
+				  beforeSend: function () {
+					ShowLoading();
+				  },
+				  complete: function () {
+					HiddenLoading();
+				  },
+				  success: function (res) {  
+					if(res.code=='00'){
+						alert(res.text);
+						location.href = 'admin.php?op=sysmgr_systemupgrade&subflag=030105';
+					}else{
+						alert(res.text);
+					}
+				  },  
+				   error: function(XMLHttpRequest, textStatus, errorThrown) {
+						alert('error');
+						console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+				   } 
+				}); 
+	        }
+        }
+	})
+ }
+function before_upgrade(file){
+	BootstrapDialog.confirm({
+        title: '警告',
+        message: '系统升级过程中不允许其他操作，确定要系统升级吗？',
+		btnCancelLabel: '取消',
+        btnOKLabel: '确定',
+        callback:function(result){
+	        if(result) {
+				$.ajax({  
+				  url: 'admin.php?op=sysmgr_systemupgrade' ,  
+				  type: 'POST',  
+				  data: 'action=import&filename='+file+'&subflag=030105',
+				  dataType:'json',
+				  beforeSend: function () {
+					ShowLoading();
+				  },
+				  complete: function () {
+					HiddenLoading();
+				  },
+				  success: function (res) {  
+					if(res.code=='00'){
+						alert(res.text);
+						location.href = 'admin.php?op=sysmgr_systemupgrade&subflag=030105';
+					}else{
+						alert(res.text);
+					}
+				  },  
+				   error: function(XMLHttpRequest, textStatus, errorThrown) {
+						alert('error');
+						console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+				   } 
+				}); 
+	        }
+        }
+	})
+}
+function checkFiletype(){
+	var path=$("#impfile").val();
+	var pos=path.indexOf(".");
+	var filetype=path.substr(pos+1);
+
+	if(filetype!="tar.gz"){
+		alert("导入文件类型为tar.gz文件，请重试！");
+		return false;
+	}
+
+	BootstrapDialog.confirm({
+        title: '警告',
+        message: '上传文件过程中不允许其他操作，确定要上传吗？',
+		btnCancelLabel: '取消',
+        btnOKLabel: '确定',
+        callback:function(result){
+	        if(result) {
+				var formData = new FormData($( "#uploadForm" )[0]);  
+				$.ajax({  
+				  url: 'admin.php?op=sysmgr_systemupgrade&action=upload' ,  
+				  type: 'POST',  
+				  data: formData, 
+				  cache: false,
+				  contentType: false,
+				  processData: false,
+				  dataType:'json',
+				  beforeSend: function () {
+					ShowLoading();
+				  },
+				  complete: function () {
+					HiddenLoading();
+				  },
+				  success: function (res) {  
+					if(res.code=='00'){
+						alert(res.text);
+						location.href = 'admin.php?op=sysmgr_systemupgrade&subflag=030105&page=1';
+					}else{
+						alert(res.text);
+					}
+				  },  
+				   error: function(XMLHttpRequest, textStatus, errorThrown) {
+						alert('error');
+						console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+				   } 
+				}); 
+	        }
+        }
+	})
+	
+}
+</script>

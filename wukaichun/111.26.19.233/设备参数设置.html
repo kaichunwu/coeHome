@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="cn/jscript/reg.js"></script>
+<script language="JavaScript" src="cn/jscript/md5.js"></script>
+<link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="cn/css/metro/uniform.default.css" />
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+select{margin-bottom:auto;}
+table input[type="text"],input[type="password"]{width: auto;}
+table select{width:auto;}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;"><style>
+	.even-row{background-color:#DFEFFC;}
+	.odd-row{background-color:#F5F8F9;}
+	textarea,select,input[type="text"]{margin-top: 10px;}
+	select{margin-bottom: 10px;}
+	form{margin:0;}
+</style>
+<script language="JavaScript">
+function form_Validator() {
+	if(!(isEmpty($("#register_race").val()))&&!isNumber($("#register_race").val())){
+		$("#register_race").focus();
+		alert("注册速度格式不合法，请重新输入！");
+		return false;
+	}
+	if(!(isNumber($("#national_limit").val()) || $("#national_limit").val()==-1)){
+		$("#national_limit").focus();
+		alert("国内通话总时长格式不合法，请重新输入！");
+		return false;
+	}	
+	if(!(isEmpty($("#sessionExpires").val()))&&!isNumber($("#sessionExpires").val())){
+		$("#sessionExpires").focus();
+		alert("会话刷新周期格式不合法，请重新输入！");
+		return false;
+	}
+	if(!(isNumber($("#international_limit").val()) || $("#international_limit").val()==-1)){
+		$("#international_limit").focus();
+		alert("国际通话总时长格式不合法，请重新输入！");
+		return false;
+	}
+	if(!(isEmpty($("#sessionMinse").val()))&&!isNumber($("#sessionMinse").val())){
+		$("#sessionMinse").focus();
+		alert("最小会话刷新周期格式不合法，请重新输入！");
+		return false;
+	}
+	if(!(isNumber($("#call_per_limit").val()) || $("#call_per_limit").val()==-1)){
+		$("#call_per_limit").focus();
+		alert("每次呼叫时长限制格式不合法，请重新输入！");
+		return false;
+	}
+	if(!(isEmpty($("#noanswer_timeout").val()))&&!isNumber($("#noanswer_timeout").val())){
+		$("#noanswer_timeout").focus();
+		alert("无应答超时时长格式不合法，请重新输入！");
+		return false;
+	}
+
+    $.ajax({
+       type: "POST",
+       url: "admin.php?op=advancedmgr_sysparameter",
+       data: $("#updateFormData").serialize(),
+       dataType:'json',
+        beforeSend: function () {
+           ShowLoading();
+        },
+        complete: function () {
+            HiddenLoading();
+        },
+       success: function(res){
+        if(res.code=='00'){
+            alert(res.text);
+            location.href = 'admin.php?op=advancedmgr_sysparameter&subflag=';
+        }else{
+            alert(res.text);
+        }
+       },
+       error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert('error');
+            console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+       }
+    });
+
+	return true;
+}
+ function jump(order)
+{
+	document.formJump.submit();    
+} 
+</script>
+<div class="row-fluid">
+  <div class="span12">
+	<form id="updateFormData" name="formData">
+    <table width="100%" style="margin-top:10px;">
+    	<tr>
+    		<td>
+    			<table class="data-table1" width="100%" border="0" cellpadding="0" cellspacing="0">
+			    	<colgroup>
+					   <col width="15%">
+			           <col width="40%">
+			           <col width="15%">
+			           <col width="30%">
+			        </colgroup>
+			        <tbody>
+			        <tr height="25px" class="even-row">
+			           <td style="padding:8px 0 8px 15px;">SIP通信端口</td>
+			           <td>5060</td>
+			           <td>日志级别</td>
+			           <td>
+							DEBUG
+						</td>
+			        </tr>
+			        <tr height="25px" class="odd-row">
+			        	<td style="padding-left:15px;">注册鉴权</td>
+			           <td>
+							<select id="register_auth" name="register_auth"><option value='0'>关闭</option><option value='1'>打开</option></select>
+						</td>
+			        	<td>呼叫鉴权</td>
+			           <td>
+							<select id="invite_auth" name="invite_auth"><option value='0'>关闭</option><option value='1'>打开</option></select>
+						</td>
+			        </tr>
+			        <tr height="25px" class="even-row">
+			        	<td style="padding-left:15px;">订阅鉴权</td>
+			           <td>
+							<select id="subcribe_auth" name="subcribe_auth"><option value='0'>关闭</option><option value='1'>打开</option></select>
+						</td>
+			        	<td>消息鉴权</td>
+			           <td>
+							<select id="message_auth" name="message_auth"><option value='0'>关闭</option><option value='1'>打开</option></select>
+						</td>
+			        </tr>
+			        <tr height="25px" class="odd-row">
+			        	<td style="padding-left:15px;">CDR开关</td>
+			           <td>
+							<select id="cdr_on_off" name="cdr_on_off"><option value='0'>关闭</option><option value='1'>打开</option></select>
+						</td>
+			        	<td>设备类型</td>
+			           <td>
+							<select id="device_type" name="device_type"><option value='SIPGW&IPPBX'>SIPGW&IPPBX</option><option value='SoftSwitch'>SoftSwitch</option></select>
+						</td>
+			        </tr>
+			        <tr height="25px" class="even-row">
+			        	<td style="padding-left:15px;">VIP开关</td>
+			           <td>
+							<select id="vip_on_off" name="vip_on_off"><option value='0'>关闭</option><option value='1'>打开</option></select>
+						</td>
+			        	<td>携带user=phone</td>
+			           <td>
+							<select id="usereqphone" name="usereqphone"><option value='0'>不携带</option><option value='1'>携带</option></select>
+						</td>
+			        </tr>
+			        <tr height="25px" class="odd-row">
+			        	<td style="padding-left:15px;">媒体流传输方式</td>
+			           <td>
+							<select id="directmedia" name="directmedia"><option value='0'>服务器转发</option></select>
+						</td>
+			        	<td>IPPBX业务</td>
+			           <td>
+							<select id="ippbx_business" name="ippbx_business"  disabled="true"><option value='0'>不启用</option><option value='1'>启用</option></select>
+						</td>
+			        </tr>
+			        <tr height="25px" class="even-row">
+						<td style="padding-left:15px;">Supported头域</td>
+						<td>
+							<input type="text" name="supported_header" value="timer|replaces|100rel"  style="width: 122px;">
+							&nbsp;<font color="green">支持timer|100rel|replaces</font>
+						</td>
+					  <td>Date头域</td>
+			           <td>
+							<select id="date_header" name="date_header"><option value='0'>不启用</option><option value='1'>启用</option></select>
+						</td>
+			        </tr>
+			        <tr height="25px" class="odd-row">
+						<td style="padding-left:15px;">注册速度</td>
+			            <td>
+							<input type="text" id="register_race" name="register_race" value="50"  style="width: 90px;">
+							&nbsp;<font color="green">单位：个/秒&nbsp;&nbsp;(数字 默认5)</font>
+						</td>
+						<td>启用会话刷新</td>
+			            <td>
+			            	<select id="enableSession" name="enableSession"><option value='refuse'>不启用</option><option value='originate' selected>启用</option></select>
+			            </td>
+			        </tr>
+			        <tr height="25px" class="even-row">	        
+			            <td style="padding-left:15px;">国内通话总时长限制</td>
+			            <td>
+							<input type="text" id="national_limit" name="national_limit" value="-1"  style="width: 90px;">
+							&nbsp;<span style="color:green">单位：分钟/天 （-1表示不限制）</span>
+						</td>
+ 						<td title="启用会话刷新时才生效">会话刷新周期</td>
+			            <td title="启用会话刷新时才生效">
+							<input type="text" id="sessionExpires" name="sessionExpires" value="900"  style="width: 90px;">
+							&nbsp;<span style="color:green">单位：秒</span>
+						</td>
+			        </tr>
+			        <tr height="25px" class="odd-row">			       
+			            <td style="padding-left:15px;">国际通话总时长限制</td>
+			            <td>
+							<input type="text" id="international_limit" name="international_limit" value="90"  style="width: 90px;">
+							&nbsp;<span style="color:green">单位：分钟/天 （-1表示不限制）</span>
+						</td>
+					   <td title="启用会话刷新时才生效">最小会话刷新周期</td>
+			            <td title="启用会话刷新时才生效">
+							<input type="text" id="sessionMinse" name="sessionMinse" value="90"  style="width: 90px;">
+							&nbsp;<span style="color:green">单位：秒，建议90s</span>
+						</td>
+			        </tr>
+			        <tr height="25px" class="even-row">			        
+			            <td style="padding-left:15px;">每次呼叫时长限制</td>
+			            <td>
+							<input type="text" id="call_per_limit" name="call_per_limit" value="-1"  style="width: 90px;">
+							&nbsp;<span style="color:green">单位：分钟 （-1表示不限制）</span>
+						</td>
+ 						<td>无应答超时时长</td>
+			            <td>
+							<input type="text" id="noanswer_timeout" name="noanswer_timeout" value="40"  style="width: 90px;">
+							&nbsp;<span style="color:green">单位：秒</span>
+						</td>
+			        </tr>
+   			<tr height="25px" class="odd-row">
+			        	<td style="padding-left:15px;">工作模式</td>
+			           <td>
+							<select id="performance_mode" name="performance_mode"><option value='0'>SIPGW</option><option value='1'>IPPBX</option></select>
+						</td>
+						<td>三方通话</td>
+			            <td>
+			            <select id="threeconf" name="threeconf"><option value='0'>关闭</option><option value='1'>打开</option></select>
+						</td>
+			        </tr>
+<!-- 					<tr height="25px" class="even-row"> -->
+<!-- 			        	<td></td> -->
+<!-- 			           <td> -->
+							
+<!-- 						</td> -->
+<!-- 						<td></td> -->
+<!-- 			            <td> -->
+<!-- 						</td> -->
+<!-- 			        </tr> -->
+			    </tbody>
+			    </table>
+    		</td>
+    	</tr>
+    	    	<tr height="40px">
+	        <td>
+	        	<input type="hidden" name="subflag" value="">
+	        	<input type="hidden" name="action" value="update">
+	        	<span class="btn btn-primary" onclick="form_Validator()">设置</span>
+	        </td>
+	    </tr>
+	        </table>	
+	</form>		
+	</div>
+</div>
+<script language="JavaScript">
+$("#register_auth").val('1');
+$("#threeconf").val('0');
+$("#invite_auth").val('0');
+$("#subcribe_auth").val('0');
+$("#message_auth").val('0');
+$("#cdr_on_off").val('1');
+$("#vip_on_off").val('0');
+$("#ippbx_business").val('');
+$("#date_header").val('1');
+$("#device_type").val('SIPGW&IPPBX');
+$("#usereqphone").val('1');
+$("#directmedia").val('0');
+$("#performance_mode").val('1');
+$("#enableSession").change(function(){
+	//alert($("#enableSession").val());
+	if($("#enableSession").val()=="refuse"){
+		$("#sessionMinse").attr("disabled",true);
+		$("#sessionExpires").attr("disabled",true);			
+	}else{
+		$("#sessionMinse").attr("disabled",false);
+		$("#sessionExpires").attr("disabled",false);	
+	}
+});
+$("#performance_mode").change(function(){
+	//alert($("#enableSession").val());
+	if($("#performance_mode").val()=="0"){
+		$("#ippbx_business").val(0);
+	}else{
+		$("#ippbx_business").val(1);
+		
+	}
+});
+//*************初始化 Start******************
+$(document).ready(function(){
+if($("#performance_mode").val()=="0"){
+	$("#ippbx_business").val(0);
+}else{
+	$("#ippbx_business").val(1);
+}
+	if($("#enableSession").val()=="refuse")
+	{
+		$("#sessionMinse").attr("disabled",true);
+		$("#sessionExpires").attr("disabled",true);			
+	}else{
+		$("#sessionMinse").attr("disabled",false);
+		$("#sessionExpires").attr("disabled",false);	
+	}
+});
+//*************初始化 End******************
+</script>
+<div id="ajaxMask" style="display:none;width:100%;height:100%;background-color:#000;position:absolute;top:0;left:0;z-index:10000;opacity:0.8;filter: alpha(opacity=80);">
+    <div style="top:45%;left:45%;width:125px;height:25px;position:absolute;z-index:10001; background-color:#FFFFFF;line-height:25px;text-align: center;">
+        <img src="cn/img/loading.gif" style="vertical-align:middle;"/> Loading...
+    </div>
+</div><div style="height:40px;"></div>
+	<script type="text/javascript" src="cn/jscript/metro/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript">
+	$(document).bind('mousewheel DOMMouseScroll', function(e) { 
+		var offset = $(window.parent.document).scrollTop();
+	    var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
+	                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
+	    if (delta > 0) {
+	        $(window.parent).scrollTop(offset-40); // 向上滚
+	    } else if (delta < 0) {
+	        $(window.parent).scrollTop(parseInt(offset)+parseInt(40)); // 向下滚
+	    }
+	});
+</script>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script>

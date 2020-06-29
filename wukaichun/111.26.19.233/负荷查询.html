@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="系统维护.html" target="mainFrame">系统维护</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">负荷查询</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><link rel="stylesheet" type="text/css" href="cn/css/metro/bootstrap-datetimepicker.min.css" />
+<style type="text/css">
+		#consuming_time{ font-size:12px; border:solid 1px #ccc; background-color:#f2f6fb; margin:10px 20px; height:40px; line-height:20px; padding:5px 10px; width:260px; }
+		#MEMORY{ width:460px; height:240px; border:solid 1px #B3B3DC; position:relative; top:0px; left:0px;}
+		#CPU{ width:460px; height:240px; border:solid 1px #B3B3DC; position:relative; top:0px; left:30px;}
+		#SPACE{ width:460px; height:240px; border:solid 1px #B3B3DC; position:relative; top:0px; left:0px;}
+		#PROCESS{ width:460px; height:240px; border:solid 1px #B3B3DC; position:relative; top:0px; left:30px;}
+		#USER{ width:460px; height:240px; border:solid 1px #B3B3DC; position:relative; top:0px; left:0px;}
+		#LINE{ width:380px; left:40px; border-top:1px dotted #B9B9B9; height:1px; line-height:1px; display:block; overflow:hidden; position:absolute;}
+		select,input[type="text"]{margin-bottom:initial;}
+</style>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<form name="form1" method="POST" style="margin:10px 0;padding:5px;border:1px solid #f5f5f5;" action="admin.php?op=sysmgr_loadquery&action=query">
+				<table width="100%">
+					<tr>
+						<td style="padding-left: 8px;">日期选择&nbsp;&nbsp;
+							<div id="qdate" class="input-append date form_datetime" style="margin-top:10px;">
+							    <input style="width:auto;" type="text" name="qdate" value="2018-08-02" readonly>
+							    <span class="add-on"><i class="icon-calendar"></i></span>
+							</div>
+							&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value='查 询' /></td>
+						<input type="hidden" id="subflag" name="subflag" value="030301">
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+
+	<div id="datas">
+		<table>
+			<tbody><tr>
+		        <td>
+		            <table border="0" cellpadding="0" cellspacing="10" width="98%" height="100%">
+		            <colgroup>
+		                <col width="50%">
+		                <col width="50%">
+		            </colgroup>
+		            <tbody><tr>
+		                <td align="center">
+		                <div id="MEMORY">
+		                			                	<div id="sumrow_0_MEMORY_" class="incallchartsumrow" style="left: 50px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_0MEMORY" class="callnum" style="left: 50px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">0</span>
+		                	</div>
+		                			                	<div id="sumrow_1_MEMORY_0" class="incallchartsumrow" style="left: 66px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_1MEMORY" class="callnum" style="left: 66px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">1</span>
+		                	</div>
+		                			                	<div id="sumrow_2_MEMORY_0" class="incallchartsumrow" style="left: 82px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_2MEMORY" class="callnum" style="left: 82px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">2</span>
+		                	</div>
+		                			                	<div id="sumrow_3_MEMORY_0" class="incallchartsumrow" style="left: 98px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_3MEMORY" class="callnum" style="left: 98px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">3</span>
+		                	</div>
+		                			                	<div id="sumrow_4_MEMORY_0" class="incallchartsumrow" style="left: 114px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_4MEMORY" class="callnum" style="left: 114px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">4</span>
+		                	</div>
+		                			                	<div id="sumrow_5_MEMORY_0" class="incallchartsumrow" style="left: 130px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_5MEMORY" class="callnum" style="left: 130px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">5</span>
+		                	</div>
+		                			                	<div id="sumrow_6_MEMORY_0" class="incallchartsumrow" style="left: 146px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_6MEMORY" class="callnum" style="left: 146px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">6</span>
+		                	</div>
+		                			                	<div id="sumrow_7_MEMORY_0" class="incallchartsumrow" style="left: 162px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_7MEMORY" class="callnum" style="left: 162px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">7</span>
+		                	</div>
+		                			                	<div id="sumrow_8_MEMORY_0" class="incallchartsumrow" style="left: 178px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_8MEMORY" class="callnum" style="left: 178px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">8</span>
+		                	</div>
+		                			                	<div id="sumrow_9_MEMORY_0" class="incallchartsumrow" style="left: 194px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_9MEMORY" class="callnum" style="left: 194px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">9</span>
+		                	</div>
+		                			                	<div id="sumrow_10_MEMORY_0" class="incallchartsumrow" style="left: 210px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_10MEMORY" class="callnum" style="left: 210px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">10</span>
+		                	</div>
+		                			                	<div id="sumrow_11_MEMORY_0" class="incallchartsumrow" style="left: 226px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_11MEMORY" class="callnum" style="left: 226px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">11</span>
+		                	</div>
+		                			                	<div id="sumrow_12_MEMORY_0" class="incallchartsumrow" style="left: 242px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_12MEMORY" class="callnum" style="left: 242px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">12</span>
+		                	</div>
+		                			                	<div id="sumrow_13_MEMORY_0" class="incallchartsumrow" style="left: 258px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_13MEMORY" class="callnum" style="left: 258px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">13</span>
+		                	</div>
+		                			                	<div id="sumrow_14_MEMORY_0" class="incallchartsumrow" style="left: 274px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_14MEMORY" class="callnum" style="left: 274px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">14</span>
+		                	</div>
+		                			                	<div id="sumrow_15_MEMORY_0" class="incallchartsumrow" style="left: 290px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_15MEMORY" class="callnum" style="left: 290px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">15</span>
+		                	</div>
+		                			                	<div id="sumrow_16_MEMORY_0" class="incallchartsumrow" style="left: 306px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_16MEMORY" class="callnum" style="left: 306px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">16</span>
+		                	</div>
+		                			                	<div id="sumrow_17_MEMORY_0" class="incallchartsumrow" style="left: 322px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_17MEMORY" class="callnum" style="left: 322px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">17</span>
+		                	</div>
+		                			                	<div id="sumrow_18_MEMORY_0" class="incallchartsumrow" style="left: 338px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_18MEMORY" class="callnum" style="left: 338px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">18</span>
+		                	</div>
+		                			                	<div id="sumrow_19_MEMORY_0" class="incallchartsumrow" style="left: 354px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_19MEMORY" class="callnum" style="left: 354px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">19</span>
+		                	</div>
+		                			                	<div id="sumrow_20_MEMORY_0" class="incallchartsumrow" style="left: 370px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_20MEMORY" class="callnum" style="left: 370px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">20</span>
+		                	</div>
+		                			                	<div id="sumrow_21_MEMORY_0" class="incallchartsumrow" style="left: 386px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_21MEMORY" class="callnum" style="left: 386px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">21</span>
+		                	</div>
+		                			                	<div id="sumrow_22_MEMORY_0" class="incallchartsumrow" style="left: 402px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_22MEMORY" class="callnum" style="left: 402px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">22</span>
+		                	</div>
+		                			                	<div id="sumrow_23_MEMORY_0" class="incallchartsumrow" style="left: 418px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_23MEMORY" class="callnum" style="left: 418px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">23</span>
+		                	</div>
+		                			                	
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 14px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 20px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 50px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 56px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 86px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 92px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 122px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 128px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 158px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 164px;"></div>
+		                			                </div>
+		                </td>		                	
+		                <td align="center">
+		                <div id="CPU">
+		                			                	<div id="sumrow_0_CPU_" class="incallchartsumrow" style="left: 50px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_0CPU" class="callnum" style="left: 50px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">0</span>
+		                	</div>
+		                			                	<div id="sumrow_1_CPU_0" class="incallchartsumrow" style="left: 66px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_1CPU" class="callnum" style="left: 66px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">1</span>
+		                	</div>
+		                			                	<div id="sumrow_2_CPU_0" class="incallchartsumrow" style="left: 82px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_2CPU" class="callnum" style="left: 82px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">2</span>
+		                	</div>
+		                			                	<div id="sumrow_3_CPU_0" class="incallchartsumrow" style="left: 98px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_3CPU" class="callnum" style="left: 98px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">3</span>
+		                	</div>
+		                			                	<div id="sumrow_4_CPU_0" class="incallchartsumrow" style="left: 114px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_4CPU" class="callnum" style="left: 114px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">4</span>
+		                	</div>
+		                			                	<div id="sumrow_5_CPU_0" class="incallchartsumrow" style="left: 130px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_5CPU" class="callnum" style="left: 130px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">5</span>
+		                	</div>
+		                			                	<div id="sumrow_6_CPU_0" class="incallchartsumrow" style="left: 146px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_6CPU" class="callnum" style="left: 146px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">6</span>
+		                	</div>
+		                			                	<div id="sumrow_7_CPU_0" class="incallchartsumrow" style="left: 162px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_7CPU" class="callnum" style="left: 162px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">7</span>
+		                	</div>
+		                			                	<div id="sumrow_8_CPU_0" class="incallchartsumrow" style="left: 178px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_8CPU" class="callnum" style="left: 178px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">8</span>
+		                	</div>
+		                			                	<div id="sumrow_9_CPU_0" class="incallchartsumrow" style="left: 194px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_9CPU" class="callnum" style="left: 194px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">9</span>
+		                	</div>
+		                			                	<div id="sumrow_10_CPU_0" class="incallchartsumrow" style="left: 210px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_10CPU" class="callnum" style="left: 210px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">10</span>
+		                	</div>
+		                			                	<div id="sumrow_11_CPU_0" class="incallchartsumrow" style="left: 226px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_11CPU" class="callnum" style="left: 226px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">11</span>
+		                	</div>
+		                			                	<div id="sumrow_12_CPU_0" class="incallchartsumrow" style="left: 242px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_12CPU" class="callnum" style="left: 242px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">12</span>
+		                	</div>
+		                			                	<div id="sumrow_13_CPU_0" class="incallchartsumrow" style="left: 258px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_13CPU" class="callnum" style="left: 258px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">13</span>
+		                	</div>
+		                			                	<div id="sumrow_14_CPU_0" class="incallchartsumrow" style="left: 274px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_14CPU" class="callnum" style="left: 274px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">14</span>
+		                	</div>
+		                			                	<div id="sumrow_15_CPU_0" class="incallchartsumrow" style="left: 290px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_15CPU" class="callnum" style="left: 290px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">15</span>
+		                	</div>
+		                			                	<div id="sumrow_16_CPU_0" class="incallchartsumrow" style="left: 306px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_16CPU" class="callnum" style="left: 306px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">16</span>
+		                	</div>
+		                			                	<div id="sumrow_17_CPU_0" class="incallchartsumrow" style="left: 322px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_17CPU" class="callnum" style="left: 322px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">17</span>
+		                	</div>
+		                			                	<div id="sumrow_18_CPU_0" class="incallchartsumrow" style="left: 338px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_18CPU" class="callnum" style="left: 338px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">18</span>
+		                	</div>
+		                			                	<div id="sumrow_19_CPU_0" class="incallchartsumrow" style="left: 354px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_19CPU" class="callnum" style="left: 354px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">19</span>
+		                	</div>
+		                			                	<div id="sumrow_20_CPU_0" class="incallchartsumrow" style="left: 370px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_20CPU" class="callnum" style="left: 370px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">20</span>
+		                	</div>
+		                			                	<div id="sumrow_21_CPU_0" class="incallchartsumrow" style="left: 386px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_21CPU" class="callnum" style="left: 386px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">21</span>
+		                	</div>
+		                			                	<div id="sumrow_22_CPU_0" class="incallchartsumrow" style="left: 402px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_22CPU" class="callnum" style="left: 402px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">22</span>
+		                	</div>
+		                			                	<div id="sumrow_23_CPU_0" class="incallchartsumrow" style="left: 418px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_23CPU" class="callnum" style="left: 418px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">23</span>
+		                	</div>
+		                			                	
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 14px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 20px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 50px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 56px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 86px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 92px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 122px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 128px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 158px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 164px;"></div>
+		                			                </div>
+		                </td>		                
+		            </tr>
+		            <tr align="center" height="40px" style="font-size:18px; font-weight:bold; color:green;"> 
+		               <td>内存使用率</td>
+		                <td>CPU使用率</td>
+		            </tr>
+		            <tr>
+		                <td align="center">
+		                <div id="SPACE">
+		                			                	<div id="sumrow_0_SPACE_" class="incallchartsumrow" style="left: 50px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_0SPACE" class="callnum" style="left: 50px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">0</span>
+		                	</div>
+		                			                	<div id="sumrow_1_SPACE_0" class="incallchartsumrow" style="left: 66px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_1SPACE" class="callnum" style="left: 66px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">1</span>
+		                	</div>
+		                			                	<div id="sumrow_2_SPACE_0" class="incallchartsumrow" style="left: 82px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_2SPACE" class="callnum" style="left: 82px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">2</span>
+		                	</div>
+		                			                	<div id="sumrow_3_SPACE_0" class="incallchartsumrow" style="left: 98px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_3SPACE" class="callnum" style="left: 98px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">3</span>
+		                	</div>
+		                			                	<div id="sumrow_4_SPACE_0" class="incallchartsumrow" style="left: 114px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_4SPACE" class="callnum" style="left: 114px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">4</span>
+		                	</div>
+		                			                	<div id="sumrow_5_SPACE_0" class="incallchartsumrow" style="left: 130px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_5SPACE" class="callnum" style="left: 130px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">5</span>
+		                	</div>
+		                			                	<div id="sumrow_6_SPACE_0" class="incallchartsumrow" style="left: 146px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_6SPACE" class="callnum" style="left: 146px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">6</span>
+		                	</div>
+		                			                	<div id="sumrow_7_SPACE_0" class="incallchartsumrow" style="left: 162px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_7SPACE" class="callnum" style="left: 162px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">7</span>
+		                	</div>
+		                			                	<div id="sumrow_8_SPACE_0" class="incallchartsumrow" style="left: 178px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_8SPACE" class="callnum" style="left: 178px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">8</span>
+		                	</div>
+		                			                	<div id="sumrow_9_SPACE_0" class="incallchartsumrow" style="left: 194px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_9SPACE" class="callnum" style="left: 194px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">9</span>
+		                	</div>
+		                			                	<div id="sumrow_10_SPACE_0" class="incallchartsumrow" style="left: 210px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_10SPACE" class="callnum" style="left: 210px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">10</span>
+		                	</div>
+		                			                	<div id="sumrow_11_SPACE_0" class="incallchartsumrow" style="left: 226px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_11SPACE" class="callnum" style="left: 226px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">11</span>
+		                	</div>
+		                			                	<div id="sumrow_12_SPACE_0" class="incallchartsumrow" style="left: 242px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_12SPACE" class="callnum" style="left: 242px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">12</span>
+		                	</div>
+		                			                	<div id="sumrow_13_SPACE_0" class="incallchartsumrow" style="left: 258px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_13SPACE" class="callnum" style="left: 258px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">13</span>
+		                	</div>
+		                			                	<div id="sumrow_14_SPACE_0" class="incallchartsumrow" style="left: 274px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_14SPACE" class="callnum" style="left: 274px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">14</span>
+		                	</div>
+		                			                	<div id="sumrow_15_SPACE_0" class="incallchartsumrow" style="left: 290px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_15SPACE" class="callnum" style="left: 290px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">15</span>
+		                	</div>
+		                			                	<div id="sumrow_16_SPACE_0" class="incallchartsumrow" style="left: 306px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_16SPACE" class="callnum" style="left: 306px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">16</span>
+		                	</div>
+		                			                	<div id="sumrow_17_SPACE_0" class="incallchartsumrow" style="left: 322px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_17SPACE" class="callnum" style="left: 322px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">17</span>
+		                	</div>
+		                			                	<div id="sumrow_18_SPACE_0" class="incallchartsumrow" style="left: 338px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_18SPACE" class="callnum" style="left: 338px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">18</span>
+		                	</div>
+		                			                	<div id="sumrow_19_SPACE_0" class="incallchartsumrow" style="left: 354px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_19SPACE" class="callnum" style="left: 354px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">19</span>
+		                	</div>
+		                			                	<div id="sumrow_20_SPACE_0" class="incallchartsumrow" style="left: 370px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_20SPACE" class="callnum" style="left: 370px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">20</span>
+		                	</div>
+		                			                	<div id="sumrow_21_SPACE_0" class="incallchartsumrow" style="left: 386px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_21SPACE" class="callnum" style="left: 386px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">21</span>
+		                	</div>
+		                			                	<div id="sumrow_22_SPACE_0" class="incallchartsumrow" style="left: 402px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_22SPACE" class="callnum" style="left: 402px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">22</span>
+		                	</div>
+		                			                	<div id="sumrow_23_SPACE_0" class="incallchartsumrow" style="left: 418px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_23SPACE" class="callnum" style="left: 418px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">23</span>
+		                	</div>
+		                			                	
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 14px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 20px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 50px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 56px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 86px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 92px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 122px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 128px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 158px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 164px;"></div>
+		                			                </div>
+		                </td>			                
+		                <td align="center">
+		                <div id="PROCESS">
+		                			                	<div id="sumrow_0_PROCESS_" class="incallchartsumrow" style="left: 50px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_0PROCESS" class="callnum" style="left: 50px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">0</span>
+		                	</div>
+		                			                	<div id="sumrow_1_PROCESS_0" class="incallchartsumrow" style="left: 66px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_1PROCESS" class="callnum" style="left: 66px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">1</span>
+		                	</div>
+		                			                	<div id="sumrow_2_PROCESS_0" class="incallchartsumrow" style="left: 82px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_2PROCESS" class="callnum" style="left: 82px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">2</span>
+		                	</div>
+		                			                	<div id="sumrow_3_PROCESS_0" class="incallchartsumrow" style="left: 98px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_3PROCESS" class="callnum" style="left: 98px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">3</span>
+		                	</div>
+		                			                	<div id="sumrow_4_PROCESS_0" class="incallchartsumrow" style="left: 114px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_4PROCESS" class="callnum" style="left: 114px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">4</span>
+		                	</div>
+		                			                	<div id="sumrow_5_PROCESS_0" class="incallchartsumrow" style="left: 130px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_5PROCESS" class="callnum" style="left: 130px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">5</span>
+		                	</div>
+		                			                	<div id="sumrow_6_PROCESS_0" class="incallchartsumrow" style="left: 146px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_6PROCESS" class="callnum" style="left: 146px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">6</span>
+		                	</div>
+		                			                	<div id="sumrow_7_PROCESS_0" class="incallchartsumrow" style="left: 162px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_7PROCESS" class="callnum" style="left: 162px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">7</span>
+		                	</div>
+		                			                	<div id="sumrow_8_PROCESS_0" class="incallchartsumrow" style="left: 178px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_8PROCESS" class="callnum" style="left: 178px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">8</span>
+		                	</div>
+		                			                	<div id="sumrow_9_PROCESS_0" class="incallchartsumrow" style="left: 194px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_9PROCESS" class="callnum" style="left: 194px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">9</span>
+		                	</div>
+		                			                	<div id="sumrow_10_PROCESS_0" class="incallchartsumrow" style="left: 210px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_10PROCESS" class="callnum" style="left: 210px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">10</span>
+		                	</div>
+		                			                	<div id="sumrow_11_PROCESS_0" class="incallchartsumrow" style="left: 226px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_11PROCESS" class="callnum" style="left: 226px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">11</span>
+		                	</div>
+		                			                	<div id="sumrow_12_PROCESS_0" class="incallchartsumrow" style="left: 242px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_12PROCESS" class="callnum" style="left: 242px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">12</span>
+		                	</div>
+		                			                	<div id="sumrow_13_PROCESS_0" class="incallchartsumrow" style="left: 258px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_13PROCESS" class="callnum" style="left: 258px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">13</span>
+		                	</div>
+		                			                	<div id="sumrow_14_PROCESS_0" class="incallchartsumrow" style="left: 274px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_14PROCESS" class="callnum" style="left: 274px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">14</span>
+		                	</div>
+		                			                	<div id="sumrow_15_PROCESS_0" class="incallchartsumrow" style="left: 290px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_15PROCESS" class="callnum" style="left: 290px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">15</span>
+		                	</div>
+		                			                	<div id="sumrow_16_PROCESS_0" class="incallchartsumrow" style="left: 306px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_16PROCESS" class="callnum" style="left: 306px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">16</span>
+		                	</div>
+		                			                	<div id="sumrow_17_PROCESS_0" class="incallchartsumrow" style="left: 322px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_17PROCESS" class="callnum" style="left: 322px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">17</span>
+		                	</div>
+		                			                	<div id="sumrow_18_PROCESS_0" class="incallchartsumrow" style="left: 338px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_18PROCESS" class="callnum" style="left: 338px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">18</span>
+		                	</div>
+		                			                	<div id="sumrow_19_PROCESS_0" class="incallchartsumrow" style="left: 354px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_19PROCESS" class="callnum" style="left: 354px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">19</span>
+		                	</div>
+		                			                	<div id="sumrow_20_PROCESS_0" class="incallchartsumrow" style="left: 370px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_20PROCESS" class="callnum" style="left: 370px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">20</span>
+		                	</div>
+		                			                	<div id="sumrow_21_PROCESS_0" class="incallchartsumrow" style="left: 386px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_21PROCESS" class="callnum" style="left: 386px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">21</span>
+		                	</div>
+		                			                	<div id="sumrow_22_PROCESS_0" class="incallchartsumrow" style="left: 402px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_22PROCESS" class="callnum" style="left: 402px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">22</span>
+		                	</div>
+		                			                	<div id="sumrow_23_PROCESS_0" class="incallchartsumrow" style="left: 418px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_23PROCESS" class="callnum" style="left: 418px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">23</span>
+		                	</div>
+		                			                	
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 14px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 20px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 50px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 56px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 86px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 92px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 122px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 128px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 158px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 164px;"></div>
+		                			                </div>
+		                </td>
+		            </tr>
+		            <tr align="center" height="40px" style="font-size:18px; font-weight:bold; color:green;"> 
+		            	<td>磁盘空间</td>
+		               <td>进程总数</td>
+		            </tr>
+		            <tr>
+		                <td align="center">
+		                <div id="USER">
+		                			                	<div id="sumrow_0_USER_" class="incallchartsumrow" style="left: 50px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_0USER" class="callnum" style="left: 50px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">0</span>
+		                	</div>
+		                			                	<div id="sumrow_1_USER_0" class="incallchartsumrow" style="left: 66px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_1USER" class="callnum" style="left: 66px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">1</span>
+		                	</div>
+		                			                	<div id="sumrow_2_USER_0" class="incallchartsumrow" style="left: 82px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_2USER" class="callnum" style="left: 82px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">2</span>
+		                	</div>
+		                			                	<div id="sumrow_3_USER_0" class="incallchartsumrow" style="left: 98px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_3USER" class="callnum" style="left: 98px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">3</span>
+		                	</div>
+		                			                	<div id="sumrow_4_USER_0" class="incallchartsumrow" style="left: 114px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_4USER" class="callnum" style="left: 114px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">4</span>
+		                	</div>
+		                			                	<div id="sumrow_5_USER_0" class="incallchartsumrow" style="left: 130px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_5USER" class="callnum" style="left: 130px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">5</span>
+		                	</div>
+		                			                	<div id="sumrow_6_USER_0" class="incallchartsumrow" style="left: 146px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_6USER" class="callnum" style="left: 146px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">6</span>
+		                	</div>
+		                			                	<div id="sumrow_7_USER_0" class="incallchartsumrow" style="left: 162px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_7USER" class="callnum" style="left: 162px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">7</span>
+		                	</div>
+		                			                	<div id="sumrow_8_USER_0" class="incallchartsumrow" style="left: 178px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_8USER" class="callnum" style="left: 178px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">8</span>
+		                	</div>
+		                			                	<div id="sumrow_9_USER_0" class="incallchartsumrow" style="left: 194px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_9USER" class="callnum" style="left: 194px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">9</span>
+		                	</div>
+		                			                	<div id="sumrow_10_USER_0" class="incallchartsumrow" style="left: 210px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_10USER" class="callnum" style="left: 210px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">10</span>
+		                	</div>
+		                			                	<div id="sumrow_11_USER_0" class="incallchartsumrow" style="left: 226px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_11USER" class="callnum" style="left: 226px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">11</span>
+		                	</div>
+		                			                	<div id="sumrow_12_USER_0" class="incallchartsumrow" style="left: 242px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_12USER" class="callnum" style="left: 242px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">12</span>
+		                	</div>
+		                			                	<div id="sumrow_13_USER_0" class="incallchartsumrow" style="left: 258px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_13USER" class="callnum" style="left: 258px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">13</span>
+		                	</div>
+		                			                	<div id="sumrow_14_USER_0" class="incallchartsumrow" style="left: 274px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_14USER" class="callnum" style="left: 274px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">14</span>
+		                	</div>
+		                			                	<div id="sumrow_15_USER_0" class="incallchartsumrow" style="left: 290px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_15USER" class="callnum" style="left: 290px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">15</span>
+		                	</div>
+		                			                	<div id="sumrow_16_USER_0" class="incallchartsumrow" style="left: 306px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_16USER" class="callnum" style="left: 306px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">16</span>
+		                	</div>
+		                			                	<div id="sumrow_17_USER_0" class="incallchartsumrow" style="left: 322px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_17USER" class="callnum" style="left: 322px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">17</span>
+		                	</div>
+		                			                	<div id="sumrow_18_USER_0" class="incallchartsumrow" style="left: 338px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_18USER" class="callnum" style="left: 338px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">18</span>
+		                	</div>
+		                			                	<div id="sumrow_19_USER_0" class="incallchartsumrow" style="left: 354px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_19USER" class="callnum" style="left: 354px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">19</span>
+		                	</div>
+		                			                	<div id="sumrow_20_USER_0" class="incallchartsumrow" style="left: 370px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_20USER" class="callnum" style="left: 370px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">20</span>
+		                	</div>
+		                			                	<div id="sumrow_21_USER_0" class="incallchartsumrow" style="left: 386px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_21USER" class="callnum" style="left: 386px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">21</span>
+		                	</div>
+		                			                	<div id="sumrow_22_USER_0" class="incallchartsumrow" style="left: 402px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_22USER" class="callnum" style="left: 402px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">22</span>
+		                	</div>
+		                			                	<div id="sumrow_23_USER_0" class="incallchartsumrow" style="left: 418px; height: 0px; width: 10px; position: absolute; overflow: hidden; background-image: none; background-attachment: scroll; background-color: #F2FAFF; display: block; top: 200px; background-position: 0px 0px; background-repeat: repeat repeat;"></div>
+		                	<div id="timerow_23USER" class="callnum" style="left: 418px; width: 10px; position: absolute; top: 205px;">
+		                		<span style="font-size:12px; color:#666666;">23</span>
+		                	</div>
+		                			                	
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 14px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 20px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 50px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 56px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 86px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 92px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 122px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 128px;"></div>
+		                			                		<div class="tity" style="width: 40px; position: absolute; top: 158px; left: 10px;">
+		                			<span style="font-size:12px; color:#666666;">0</span>
+		                		</div>
+		                		<div id="LINE" style="top: 164px;"></div>
+		                			                </div>
+		                </td>
+		            </tr>
+		            <tr align="center" height="40px" style="font-size:18px; font-weight:bold; color:green;"> 
+		            	<td>用户通信数</td>
+		               <td>&nbsp;</td>
+		            </tr>
+		            
+		            </tbody></table>
+		        </td>
+		    </tr>
+		</tbody></table>
+	</div>
+	<div style="height:100px;"></div>	
+	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script type="text/javascript" src="cn/jscript/metro/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="cn/jscript/metro/locales/bootstrap-datetimepicker.fr.js"></script>
+<script language="JavaScript">
+	$('#qdate').datetimepicker({
+		format: 'yyyy-mm-dd',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+	});
+
+function toShowTipMessage(id) {
+    var nodes = document.getElementById(id).getElementsByTagName("div");
+    for (var i = 0; i < nodes.length; i++) {
+        nodes[i].onmouseover = function () {
+            var temp = this.id.split("_");
+            if (temp.length < 4)
+            {
+            		return;
+            }
+            var type = temp[0];
+            var hour = temp[1];
+            var times = temp[3];
+            var tipMessage = "";
+            var tip = document.createElement("div");
+            tip.id = "TipMessage";
+            tip.style.position = "absolute";
+            tip.style.top = (parseInt(document.getElementById(this.id).style.top.replace("px", "")) - 20) + "px";
+            tip.style.left = document.getElementById(this.id).style.left;
+            if (id == "MEMORY") {
+                tipMessage = "今日" + hour + "时内存使用率为" + times +  "%";
+            } else if (id == "SPACE") {
+            	 	tipMessage = "今日" + hour + "时硬盘空间使用率为" + times +  "%";
+            } else if (id == "CPU") {
+            	 	tipMessage = "今日" + hour + "时CPU使用率为" + times +  "%";
+            } else if (id == "PROCESS") {
+            	 	tipMessage = "今日" + hour + "时进程使用数有" + times +  "个";
+            } else {
+            		tipMessage = "今日" + hour + "时进行了通信的用户有" + times +  "个";
+            }
+            tip.innerHTML = '<span style="color:#000;font-size:12px; display:block; height:20px; padding:0px 2px;  background-color:#F2FAFF; line-height:20px; text-align:left; opacity:0.8;">' + tipMessage + '</span>';
+            document.getElementById(id).appendChild(tip);
+        }
+        nodes[i].onmouseout = function () {
+            var tip = document.getElementById("TipMessage");
+            if (null != tip)
+            {
+            	document.getElementById(id).removeChild(tip);
+          	}
+        }
+    }
+}
+$(function(){
+	$("#MEMORY").mouseover(function(){
+		toShowTipMessage("MEMORY");
+	});
+	$("#CPU").mouseover(function(){
+		toShowTipMessage("CPU");
+	});
+	$("#SPACE").mouseover(function(){
+		toShowTipMessage("SPACE");
+	});
+	$("#PROCESS").mouseover(function(){
+		toShowTipMessage("PROCESS");
+	});
+	$("#USER").mouseover(function(){
+		toShowTipMessage("USER");
+	});
+});
+</script>

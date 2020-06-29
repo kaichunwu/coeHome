@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="配置分类.html" target="mainFrame">PBX配置分类</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">话单/录音查询</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><link rel="stylesheet" type="text/css" href="cn/css/metro/bootstrap-datetimepicker.min.css" />
+<link href="cn/css/metro/jquery.fancybox.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-dialog.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="cn/css/metro/uniform.default.css" />
+<script language="JavaScript">
+function before_delete(id){
+	BootstrapDialog.confirm({
+        title: '警告',
+        message: '确定要删除吗？',
+		btnCancelLabel: '取消',
+        btnOKLabel: '确定',
+        callback:function(result){
+	        if(result) {
+			    $.ajax({
+			       type: "POST",
+			       url: "admin.php?op=basicmgr_UCLCDR",
+			       data: 'action=del&chknum='+id+'&subflag=010303',
+			       dataType:'json',
+			       success: function(res){
+			         if(res.code=='00'){
+			         	alert(res.text);
+			            location.href = 'admin.php?op=basicmgr_UCLCDR&action=query&txtSexten=&txtDexten=&txtBillSec=&txtBillDateStart=&txtBillDateEnd=&page=1&subflag=010303';
+			        }else{
+			            alert(res.text);
+			        }
+			       },
+			       error: function(XMLHttpRequest, textStatus, errorThrown) {
+			       		alert('error');
+						console.log(XMLHttpRequest.status+'|'+XMLHttpRequest.readyState+'|'+textStatus);
+				   }
+			    });
+	        }
+        }
+	})
+ }
+function jump(pagenum)
+{
+	var gotoPage=document.formJump.gotoPage.value;
+	if(gotoPage==""||gotoPage=="0"||isNaN(gotoPage)||parseInt(gotoPage)>parseInt(pagenum)){
+		alert("请输入合法的页码再点击跳转！");
+		return false;
+	}
+	document.formJump.page.value=gotoPage;
+	document.formJump.submit();    
+} 
+
+function doPageJumpEvent(maxPage) {
+	var goPage = $("#gotoPage").val(); 
+	if (isValidPage(goPage, maxPage)) {
+		doPageEvent(goPage);
+	}
+}
+
+function doPageEvent(iPage) {
+	document.formJump.page.value=iPage;
+	document.formJump.submit(); 
+} 
+
+$(function(){
+//************Dialog Start**************
+
+//************Dialog End**************
+$("#downloadCondition").click(function(){
+	var txtSexten = $("form[name=form1] input[name=txtSexten]").val();
+	var txtDexten = $("form[name=form1] input[name=txtDexten]").val();
+	var txtBillSec = $("form[name=form1] input[name=txtBillSec]").val();
+	var txtBillDateStart = $("form[name=form1] input[name=txtBillDateStart]").val();
+	var txtBillDateEnd = $("form[name=form1] input[name=txtBillDateEnd]").val();
+	var cdrCallType = $("form[name=form1] select[name=cdrCallType]").val();
+	var param = {"txtSexten":txtSexten,"txtDexten":txtDexten,"txtBillSec":txtBillSec,"txtBillDateStart":txtBillDateStart,"txtBillDateEnd":txtBillDateEnd};
+
+	if(txtSexten =="" && txtDexten=="" && txtBillSec =="" && txtBillDateStart=="" && txtBillDateEnd =="" && cdrCallType ==""){
+		alert("请填写查询条件!");
+		$("input[name=txtSexten]").focus();
+	}else{
+		location.href = "admin.php?op=basicmgr_UCLCDR&action=downloadSelected&txtSexten="+txtSexten+"&txtDexten="+txtDexten+"&txtBillSec="+txtBillSec+"&txtBillDateStart="+txtBillDateStart+"&txtBillDateEnd="+txtBillDateEnd+"&cdrCallType="+cdrCallType+"&subflag=010303";
+	}
+});
+$("#delCondition").click(function(){
+	var txtSexten = $("form[name=form1] input[name=txtSexten]").val();
+	var txtDexten = $("form[name=form1] input[name=txtDexten]").val();
+	var txtBillSec = $("form[name=form1] input[name=txtBillSec]").val();
+	var txtBillDateStart = $("form[name=form1] input[name=txtBillDateStart]").val();
+	var txtBillDateEnd = $("form[name=form1] input[name=txtBillDateEnd]").val();
+	var cdrCallType = $("form[name=form1] select[name=cdrCallType]").val();
+	var param = {"txtSexten":txtSexten,"txtDexten":txtDexten,"txtBillSec":txtBillSec,"txtBillDateStart":txtBillDateStart,"txtBillDateEnd":txtBillDateEnd};
+
+	if(txtSexten =="" && txtDexten=="" && txtBillSec =="" && txtBillDateStart=="" && txtBillDateEnd =="" && cdrCallType ==""){
+		alert("请填写查询条件!");
+		$("input[name=txtSexten]").focus();
+	}else{
+		location.href ="admin.php?op=basicmgr_UCLCDR&action=del&txtSexten="+txtSexten+"&txtDexten="+txtDexten+"&txtBillSec="+txtBillSec+"&txtBillDateStart="+txtBillDateStart+"&txtBillDateEnd="+txtBillDateEnd+"&cdrCallType="+cdrCallType+"&subflag=010303" ;
+	}
+});
+$("#exportResult").click(function(){
+	var txtSexten = $("form[name=form1] input[name=txtSexten]").val();
+	var txtDexten = $("form[name=form1] input[name=txtDexten]").val();
+	var txtBillSec = $("form[name=form1] input[name=txtBillSec]").val();
+	var txtBillDateStart = $("form[name=form1] input[name=txtBillDateStart]").val();
+	var txtBillDateEnd = $("form[name=form1] input[name=txtBillDateEnd]").val();
+	var cdrCallType = $("form[name=form1] select[name=cdrCallType]").val();
+
+	var param = {"txtSexten":txtSexten,"txtDexten":txtDexten,"txtBillSec":txtBillSec,"txtBillDateStart":txtBillDateStart,"txtBillDateEnd":txtBillDateEnd};
+
+	if(txtSexten =="" && txtDexten=="" && txtBillSec =="" && txtBillDateStart=="" && txtBillDateEnd =="" && cdrCallType ==""){
+		alert("请填写查询条件!");
+		$("input[name=txtSexten]").focus();
+	}else{
+		location.href ="admin.php?op=basicmgr_UCLCDR&action=export&txtSexten="+txtSexten+"&txtDexten="+txtDexten+"&txtBillSec="+txtBillSec+"&txtBillDateStart="+txtBillDateStart+"&txtBillDateEnd="+txtBillDateEnd+"&cdrCallType="+cdrCallType+"&subflag=010303" ;
+	}
+});
+
+
+	$('#txtBillDateStart').datetimepicker({
+		format: 'yyyy-mm-dd hh:ii:ss',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 0,
+		minuteStep: 1,
+		forceParse: 0
+	});
+
+	$('#txtBillDateEnd').datetimepicker({
+		format: 'yyyy-mm-dd hh:ii:ss',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 0,
+		minuteStep: 1,
+		forceParse: 0
+	});
+
+});
+
+
+
+</script>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<style>
+				select,input[type="text"]{margin-bottom:initial;}
+				table input[type="text"]{width: 130px;}
+			</style>
+			<form name="form1" method="POST" action="admin.php?op=basicmgr_UCLCDR&action=query" style="margin:10px 0;padding:5px;border:1px solid #f5f5f5;">
+				<table width="100%">
+					<tr>
+						<td>主叫</td>			
+						<td><input type="text" style="width:auto" id='txtSexten' name="txtSexten" value=""/></td>
+						<td>被叫</td>			
+						<td><input type="text" style="width:auto" id='txtDexten' name="txtDexten" value=""/></td>
+						<td>通话类型</td>			
+						<td><select name="cdrCallType" style="width: auto;"><option value='' selected>全部</option><option value='0'>内线</option><option value='1'>外线</option><option value='2'>来电</option><option value='3'>内线</option><option value='4'>外线</option></select></td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>起始日期</td>			
+						<td>
+							<div id="txtBillDateStart" class="input-append date form_datetime" style="margin-top:10px;">
+							    <input style="width:auto;" type="text" name="txtBillDateStart" value="" readonly>
+							    <span class="add-on"><i class="icon-calendar"></i></span>
+							</div>
+						</td>	
+						<td>结束日期</td>			
+						<td>
+							<div id="txtBillDateEnd" class="input-append date form_datetime" style="margin-top:10px;">
+							    <input style="width:auto;" type="text" name="txtBillDateEnd" value="" readonly>
+							    <span class="add-on"><i class="icon-calendar"></i></span>
+							</div>
+						</td>	 
+						<td>通话时长大于</td>			
+						<td><input type="text" style="width:auto" id='txtBillSec' name="txtBillSec" value=""/>&nbsp;秒</td>
+						<td>
+						<input type="submit" class="btn btn-primary" value='查询' />		
+						<input type="hidden" id="subflag" name="subflag" value="010303">
+						</td>
+					</tr>
+					<tr>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="table table-striped table-bordered table-advance table-hover">
+                <thead>
+                <tr>
+                    <th style="text-align: center;">主叫</th>
+                    <th style="text-align: center;">被叫</th>
+                    <th style="text-align: center;">呼叫属性</th>
+                    <th style="text-align: center;">通话类型</th>
+                    <th style="text-align: center;">应答时间</th>
+                    <th style="text-align: center;">通话时长(s)</th>
+                    <th style="text-align: center;width:90px;">话单录音文件</th>
+                </tr>
+                </thead>
+                <tbody>
+                                <tr>
+				  	 <td style="text-align: center;">8004</td>	
+					 <td style="text-align: center;">*114</td>	
+					 <td style="text-align: center;">主叫</td>	
+					 <td style="text-align: center;">内线</td>	
+					 <td style="text-align: center;">2018-05-08 16:25:37</td>
+					 <td style="text-align: center;">5</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(32);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                <tr>
+				  	 <td style="text-align: center;">8003</td>	
+					 <td style="text-align: center;">*114</td>	
+					 <td style="text-align: center;">主叫</td>	
+					 <td style="text-align: center;">内线</td>	
+					 <td style="text-align: center;">2018-05-08 15:44:36</td>
+					 <td style="text-align: center;">4</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(31);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                <tr>
+				  	 <td style="text-align: center;">8001</td>	
+					 <td style="text-align: center;">8002</td>	
+					 <td style="text-align: center;">主叫</td>	
+					 <td style="text-align: center;">内线</td>	
+					 <td style="text-align: center;">2018-05-08 15:06:43</td>
+					 <td style="text-align: center;">0</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(30);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                <tr>
+				  	 <td style="text-align: center;">8002</td>	
+					 <td style="text-align: center;">8001</td>	
+					 <td style="text-align: center;">主叫</td>	
+					 <td style="text-align: center;">内线</td>	
+					 <td style="text-align: center;">2018-05-08 14:56:52</td>
+					 <td style="text-align: center;">102</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(29);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                <tr>
+				  	 <td style="text-align: center;">8001</td>	
+					 <td style="text-align: center;">8002</td>	
+					 <td style="text-align: center;">主叫</td>	
+					 <td style="text-align: center;">内线</td>	
+					 <td style="text-align: center;">2018-05-08 14:54:55</td>
+					 <td style="text-align: center;">89</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(28);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                <tr>
+				  	 <td style="text-align: center;">8001</td>	
+					 <td style="text-align: center;">8001</td>	
+					 <td style="text-align: center;">主叫</td>	
+					 <td style="text-align: center;">内线</td>	
+					 <td style="text-align: center;">2018-05-08 12:19:15</td>
+					 <td style="text-align: center;">0</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(27);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                <tr>
+				  	 <td style="text-align: center;">8002</td>	
+					 <td style="text-align: center;">*114</td>	
+					 <td style="text-align: center;">主叫</td>	
+					 <td style="text-align: center;">内线</td>	
+					 <td style="text-align: center;">2018-05-08 11:26:30</td>
+					 <td style="text-align: center;">5</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(26);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                <tr>
+				  	 <td style="text-align: center;">8002</td>	
+					 <td style="text-align: center;">*114</td>	
+					 <td style="text-align: center;">主叫</td>	
+					 <td style="text-align: center;">内线</td>	
+					 <td style="text-align: center;">2018-05-08 11:25:14</td>
+					 <td style="text-align: center;">4</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(25);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                <tr>
+				  	 <td style="text-align: center;">8001</td>	
+					 <td style="text-align: center;">8002</td>	
+					 <td style="text-align: center;">主叫</td>	
+					 <td style="text-align: center;">内线</td>	
+					 <td style="text-align: center;">2018-05-07 19:36:14</td>
+					 <td style="text-align: center;">6</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(24);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                <tr>
+				  	 <td style="text-align: center;">220001</td>	
+					 <td style="text-align: center;">7000</td>	
+					 <td style="text-align: center;">被叫</td>	
+					 <td style="text-align: center;">来电</td>	
+					 <td style="text-align: center;">2018-05-04 11:07:13</td>
+					 <td style="text-align: center;">0</td>
+                    <td style="text-align: center;">
+<!--                         <button class="btn btn-success" onclick="Monitorfilename'" alt="收听" title="点击收听录音"><i class="icon-download"></i></button> -->
+												<button class="btn btn-warning" title="不存在录音文件！" onclick="alert('不存在录音文件！')"><i class="icon-download"></i></button>
+                                                <button class="btn btn-danger" title="删除录音文件" onclick="before_delete(23);"><i class="icon-remove icon-white"></i></button>
+                    </td>
+                </tr>
+                                </tbody>
+            </table>
+
+			<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table140" height="25" style="margin-top:2px;">
+			  <form name="formJump" method="post" action="admin.php?op=basicmgr_UCLCDR&action=turn">
+			  <tr height="50px;">
+			  	 <td align="left">
+<!--  			  	 	<span class="btn btn-primary" id="downloadCondition">下载查询结果录音</span>
+					&nbsp;
+<span class="btn btn-primary" id="delCondition">删除查询结果录音</span>
+					&nbsp;  -->
+					<span class="btn btn-primary" id="exportResult">导出查询结果</span>
+					&nbsp;
+			  	 </td>
+			  	<td valign="middle" align="right">
+			     总时长:223&nbsp;秒&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;记录数：32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页：10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页：<input type="text" id="gotoPage" maxlength="5" value="1" class="ui-widget ui-widget-content ui-corner-all">&nbsp;/&nbsp;4&nbsp;
+			     <input type="button" value="跳转" class="btn btn-primary" onclick="jump(4)" role="button" aria-disabled="false">&nbsp;&nbsp;&nbsp;
+			     <input type="button" value="&lt;&lt;" title="首页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(1)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;<input type="button" value="&lt;" title="上一页" class="btn btn-primary ui-button-disabled ui-state-disabled" disabled="" onclick="doPageEvent(0)" style="padding: 5px;" role="button" aria-disabled="true">&nbsp;<input type="button" value="&gt;" title="下一页" class="btn btn-primary" onclick="doPageEvent(2)" style="padding: 5px;" role="button" aria-disabled="false">&nbsp;<input type="button" value="&gt;&gt;" title="尾页" class="btn btn-primary" onclick="doPageEvent(4)" style="padding: 5px;" role="button" aria-disabled="false">&nbsp;
+			     </td>
+			  </tr>
+			  <tr>
+					<input type="hidden" name="page" value="1">
+					<input type="hidden" name="subflag" value="010303">
+					<input type="hidden" name="txtSexten" value="">
+					<input type="hidden" name="txtDexten" value="">
+					<input type="hidden" name="cdrCallType" value="">
+					<input type="hidden" name="txtBillSec" value="">
+					<input type="hidden" name="txtBillDateStart" value="">
+					<input type="hidden" name="txtBillDateEnd" value="">
+			  </tr>
+			  </form>
+			</table>
+        </div>
+    </div>
+	<div style="height:40px;"></div>
+	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script><script type="text/javascript" src="cn/jscript/metro/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="cn/jscript/metro/locales/bootstrap-datetimepicker.fr.js"></script>

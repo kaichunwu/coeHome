@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta name="renderer" content="webkit"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<link href="cn/css/metro/bootstrap.min.css" rel="stylesheet" />
+<link href="cn/css/metro/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="cn/css/metro/font-awesome.css" rel="stylesheet" />
+<link href="cn/css/metro/style.css" rel="stylesheet" />
+<link href="cn/css/metro/style-responsive.css" rel="stylesheet" />
+<link href="cn/css/metro/style-default.css" rel="stylesheet" id="style_color" />
+<script src="cn/jscript/reg.js" type="text/javascript"></script>
+<script src="cn/jscript/md5.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery-1.8.3.min.js" type="text/javascript"></script>
+<style>
+#form1 td{
+white-space: nowrap;
+}
+form[name=form1] td{
+white-space: nowrap;
+}
+</style>
+<title></title>
+</head>
+<body style="background:#FFFFFF;">
+<div class="container-fluid" style="margin-top:60px;">
+    <div class="row-fluid">
+       <div class="span12"> 
+           <ul class="breadcrumb" style="margin:20px 0 0 0;position: relative">
+               <li>
+                   <a href="主页面.html" target="mainFrame">首页</a>
+                   <span class="divider">/</span>
+               </li>
+                              <li><a href="配置分类.html" target="mainFrame">PBX配置分类</a><span class="divider">/</span></li>
+                                             <li><a href="javascript:;" target="mainFrame">路由配置</a></li>
+                              <div style="position: absolute;top:5px;right:5px;">
+                <button class="btn btn-warning" onclick="history.back(-1)" title="Back"><i class="icon-arrow-left"></i></button>&nbsp;
+               <button class="btn btn-info" onclick="window.location.reload();" title="Refresh"><i class="icon-refresh"></i></button>
+               </div>
+           </ul>
+       </div><div class="row-fluid">
+	<div class="span12">
+        <div class="tabbable" style="padding:15px 0px;">
+            <ul class="nav nav-tabs" style="margin:0 auto;">
+                <li class="active"><a href="admin.php?op=basicmgr_routerule" target="tab1">路由规则</a></li>
+                <li><a href="admin.php?op=basicmgr_routetime" target="tab1">路由时间</a></li>
+                <li><a href="admin.php?op=basicmgr_trunkinfo" target="tab1">中继信息</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="routerule">
+				            <iframe name="tab1" id="tab1" src="admin.php?op=basicmgr_routerule" width="100%" marginwidth="0" marginheight="0" scrolling="auto" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+  function reinitIframe(){
+    var iframe = document.getElementById("tab1");
+    try{
+      var bHeight = iframe.contentWindow.document.body.scrollHeight;
+      var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+      var height = Math.min(bHeight, dHeight);
+      var wHeight = $(window).height()-200;
+      iframe.height = wHeight>height ? wHeight:height;
+    }catch (ex){}
+  }
+  window.setInterval(reinitIframe, 200);
+
+  $(".nav-tabs li").click(function(){
+    $(this).addClass("active").siblings().removeClass("active");
+  });
+
+});	
+</script>
+	</div>
+</div>
+</body>
+</html>
+<script src="cn/jscript/metro/bootstrap.min.js"></script>
+<script src="cn/jscript/metro/jquery.blockui.js"></script>
+<script src="cn/jscript/metro/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="cn/jscript/metro/jquery.scrollto.min.js"></script>
+<script src="cn/jscript/metro/common-scripts.js"></script>
+<script src="cn/jscript/metro/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="cn/jscript/tp/mybase_new.js"></script>
