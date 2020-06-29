@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat</title>
+    <script src="jquery-3.3.1.min.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: white;
+        }
+
+        .main-c {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            width: 1440px;
+        }
+
+        .page {
+            padding: 10px 10px;
+            width: 360px;
+            float: left;
+        }
+
+        .phone {
+            margin: 0 auto;
+            width: 324px;
+            height: 576px;
+            padding: 10px 10px;
+            overflow-y: scroll;
+            border-radius: 10px;
+            border: 2px solid #f2f2f2;
+        }
+
+        .ctr {
+            width: 270px;
+            margin: 0 auto;
+        }
+
+        .ctr-m {
+            padding: 3px 1px;
+        }
+
+        .ctr-o {
+            padding: 10px 1px;
+        }
+
+        .tx {
+            text-align: center;
+            padding: 0;
+        }
+
+        .tx>img {
+            border-radius: 30px;
+            height: 30px;
+            width: 30px;
+        }
+
+        .chat {
+            background-color: #f1f2f7;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            padding: 2px 2px;
+        }
+
+        .chat-l {
+            border-top-right-radius: 15px;
+        }
+
+        .chat-r {
+            border-top-left-radius: 15px;
+        }
+
+        .chat>div {
+            display: table;
+            margin: 0 auto;
+            padding: 2px 2px;
+        }
+
+        .chat>div {
+            vertical-align: middle;
+            display: table-cell;
+        }
+
+        .chat>div>img {
+            padding: 5px 2px;
+            height: 120px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .vdo {
+            text-align: center;
+            padding: 0;
+        }
+
+        .vdo>video {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .vdo>div {
+            width: 100%;
+            opacity: 0.5;
+            position: absolute;
+            background-color: white;
+            border-radius: 10px;
+            top: 0;
+            left: 10px;
+            cursor: pointer;
+        }
+
+        .vdo>div>img {
+            text-align: center;
+            width: 60px;
+        }
+
+        .vdo>div:hover {
+            opacity: 0.2;
+        }
+
+        p {
+            font-size: 14px;
+            margin: 0 auto;
+        }
+
+        .imgyuan {
+            width: 120px;
+            height: 20px;
+            border-radius: 12px;
+            padding-left: 13px;
+            margin: 0 auto;
+            position: relative;
+            top: 0px;
+            background-color: rgba(1, 150, 0, 0.3);
+        }
+
+        .imgyuan font {
+            width: 33px;
+            height: 11px;
+            border-radius: 11px;
+            margin-right: 9px;
+            margin-top: 4px;
+            display: block;
+            float: left;
+            background-color: blue;
+            cursor: pointer;
+        }
+
+        .imgyuan>font:not(:first-child) {
+            background-color: white;
+            width: 11px;
+        }
+
+        .tab {
+            overflow: hidden;
+            width: 1080px;
+            height: 100%;
+            position: relative;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .popup {
+            position: fixed;
+            z-index: 1;
+            background-color: black;
+            opacity: 1;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .bgdiv {
+            position: absolute;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            text-align: center;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            background-color: white;
+        }
+
+        .cls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            height: 20px;
+            padding: 0;
+            z-index: 20;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="main-c" id="fa" style="left: 0;">
+
+            <div class="page" id="p1">
+                <div class="container phone">
+                    <div class="ctr-o">
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                                <img src="tx.png">
+                            </div>
+                            <div class="col-8 chat chat-l">
+                                <div>
+                                    <p>Test1 test1 test1 test test test test test test</p>
+                                </div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                            </div>
+                            <div class="col-8 vdo">
+                                <video src="video.mov" id="video1"></video>
+                                <div id="player1"><img src="player.png"></div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                        <div class="col-8 chat chat-l">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                                <img src="sky.JPG">
+                                <img src="sky2.JPG">
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="ctr-o">
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                                <img src="tx.png">
+                            </div>
+                            <div class="col-8 chat chat-l">
+                                <div>
+                                    <p>Test test test test test test test test test</p>
+                                </div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                            </div>
+                            <div class="col-8 vdo">
+                                <video src="video.mov" id="video2"></video>
+                                <div id="player2"><img src="player.png"></div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                        <div class="col-8 chat chat-l">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                                <img src="sky.JPG">
+                                <img src="sky.JPG">
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page" id="p2">
+                <div class="container phone">
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test2 test2 test2 test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="ctr-o">
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                                <img src="tx.png">
+                            </div>
+                            <div class="col-8 chat chat-l">
+                                <div>
+                                    <p>Test test test test test test test test test</p>
+                                </div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                            </div>
+                            <div class="col-8 vdo">
+                                <video src="video.mov" id="video3"></video>
+                                <div id="player3"><img src="player.png"></div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                        <div class="col-8 chat chat-l">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                                <img src="sky.JPG">
+                                <img src="sky2.JPG">
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="ctr-o">
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                                <img src="tx.png">
+                            </div>
+                            <div class="col-8 chat chat-l">
+                                <div>
+                                    <p>Test test test test test test test test test</p>
+                                </div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                            </div>
+                            <div class="col-8 vdo">
+                                <video src="video.mov" id="video4"></video>
+                                <div id="player4"><img src="player.png"></div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                        <div class="col-8 chat chat-l">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                                <img src="sky.JPG">
+                                <img src="sky.JPG">
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page" id="p3">
+                <div class="container phone">
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                        <div class="col-8 chat chat-l">
+                            <div>
+                                <p>Test3 test3 test3 test test test test test test</p>
+                                <img src="sky.JPG">
+                                <img src="sky2.JPG">
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="ctr-o">
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                                <img src="tx.png">
+                            </div>
+                            <div class="col-8 chat chat-l">
+                                <div>
+                                    <p>Test test test test test test test test test</p>
+                                </div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                            </div>
+                            <div class="col-8 vdo">
+                                <video src="video.mov" id="video5"></video>
+                                <div id="player5"><img src="player.png"></div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                        <div class="col-8 chat chat-l">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                                <img src="sky.JPG">
+                                <img src="sky.JPG">
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="ctr-o">
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                                <img src="tx.png">
+                            </div>
+                            <div class="col-8 chat chat-l">
+                                <div>
+                                    <p>Test test test test test test test test test</p>
+                                </div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                            </div>
+                            <div class="col-8 vdo">
+                                <video src="video.mov" id="video6"></video>
+                                <div id="player6"><img src="player.png"></div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page" id="p4">
+                <div class="container phone">
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test4 test4 test4 test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                        <div class="col-8 chat chat-l">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                                <img src="sky.JPG">
+                                <img src="sky2.JPG">
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="ctr-o">
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                                <img src="tx.png">
+                            </div>
+                            <div class="col-8 chat chat-l">
+                                <div>
+                                    <p>Test test test test test test test test test</p>
+                                </div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                            </div>
+                            <div class="col-8 vdo">
+                                <video src="video.mov" id="video7"></video>
+                                <div id="player7"><img src="player.png"></div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                        <div class="col-8 chat chat-l">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                                <img src="sky.JPG">
+                                <img src="sky.JPG">
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                        </div>
+                    </div>
+                    <div class="row ctr ctr-o">
+                        <div class="col-2 tx">
+                        </div>
+                        <div class="col-8 chat chat-r">
+                            <div>
+                                <p>Test test test test test test test test test</p>
+                            </div>
+                        </div>
+                        <div class="col-2 tx">
+                            <img src="tx.png">
+                        </div>
+                    </div>
+                    <div class="ctr-o">
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                                <img src="tx.png">
+                            </div>
+                            <div class="col-8 chat chat-l">
+                                <div>
+                                    <p>Test test test test test test test test test</p>
+                                </div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                        <div class="row ctr ctr-m">
+                            <div class="col-2 tx">
+                            </div>
+                            <div class="col-8 vdo">
+                                <video src="video.mov" id="video8"></video>
+                                <div id="player8"><img src="player.png"></div>
+                            </div>
+                            <div class="col-2 tx">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="imgyuan">
+        <font></font>
+        <font></font>
+        <font></font>
+        <font></font>
+    </div>
+
+    <div class="popup">
+
+    </div>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script> -->
+
+    <script type="text/javascript">
+        function plyer(id) {
+            var ply = document.getElementById("player" + id);
+            var vdo = document.getElementById("video" + id);
+            // ply.style.width = vdo.getBoundingClientRect().width + "px";
+            ply.style.width = vdo.offsetWidth + "px";
+            ply.style.height = vdo.offsetHeight + "px";
+            ply.style.lineHeight = ply.style.height;
+            ply.style.left = vdo.offsetLeft + "px";
+            ply.style.top = vdo.offsetTop + "px";
+            // ply.offsetTop = vdo.offsetTop;
+            // ply.offsetLeft = vdo.offsetLeft;
+            $('#player' + id).off('click');
+            $('#player' + id).on("click", function () {
+                $('.popup').empty();
+                $('.popup').off('click');
+                let nvd = $('<video src=\"' + vdo.getAttribute('src') + '\" ></video>');
+                let icn = $('<img src=\"' + 'pause.png' + '\" >');
+                let cls = $('<img src=\"' + 'close.png' + '\" >');
+                if (vdo.getBoundingClientRect().height > vdo.getBoundingClientRect().width) {
+                    nvd.css('height', $('.popup').css('height'));
+                }
+                else nvd.css('width', $('.popup').css('width'));
+                $('.popup').css('text-align', 'center');
+                $('.popup').css('margin', '0 auto');
+                $('.popup').append(nvd);
+                let ndiv = $('<div></div>');
+                ndiv.addClass('bgdiv');
+                ndiv.css('line-height', $('.popup').css('height'));
+                icn.css('text-align', 'center');
+                icn.css('height', parseFloat($('.popup').css('height')) / 5 + 'px');
+                icn.css('cursor', 'pointer');
+                cls.addClass('cls');
+                ndiv.append(icn);
+
+                $('.popup').append(ndiv);
+                icn.on('click', function () {
+                    if (nvd.get(0).paused) {
+                        nvd.get(0).play();
+                        icn.attr('src', 'pause.png');
+                        ndiv.css('opacity', 0.2);
+                    } else {
+                        nvd.get(0).pause();
+                        icn.attr('src', 'player.png');
+                        ndiv.css('opacity', 0.2);
+                    }
+                });
+                cls.on('click', function () {
+                    if (!nvd.get(0).paused) nvd.get(0).pause();
+                    $('.popup').hide();
+                });
+                nvd.on('ended', function () {
+                    ndiv.css('opacity', 0.5);
+                    icn.attr('src', 'player.png');
+                });
+                $('.popup').append(cls);
+                icn.on('mouseover', function () {
+                    ndiv.css('opacity', 0.2);
+                });
+                icn.on('mouseout', function () {
+                    if (!nvd.get(0).paused) ndiv.css('opacity', 0);
+                    else ndiv.css('opacity', 0.5);
+                });
+                $('.popup').show();
+                nvd.get(0).play();
+            });
+        }
+        function initWeb() {
+            var autoPlay = function () {
+                yuan[pos].style.backgroundColor = 'white';
+                // pages[pos].style.display = 'none';
+                yuan[pos].style.width = '11px';
+                let nx = (pos + 1 == len) ? 0 : pos + 1;
+                rotateThree(nx);
+                pos = nx;
+                // pages[pos].style.display = 'block';
+                yuan[pos].style.backgroundColor = 'blue';
+                yuan[pos].style.width = '33px';
+
+            }
+            // var start = setInterval(autoPlay, 3000);
+            // $('.tab').mouseover(function () {
+            //     clearInterval(start);
+            // });
+            // $('.tab').mouseout(function () {
+            //     start = setInterval(autoPlay, 3000);
+            // });
+            $('font').mouseover(function () {
+                // clearInterval(start);
+                if (flag) {
+                    if(pos==$(this).index()) return;
+                    flag = false;
+                    yuan[pos].style.backgroundColor = 'white';
+                    // pages[pos].style.display = 'none';
+                    yuan[pos].style.width = '11px';
+                    rotateThree($(this).index());
+                    pos = $(this).index();
+                    // pages[pos].style.display = 'block';
+                    yuan[pos].style.backgroundColor = 'blue';
+                    yuan[pos].style.width = '33px';
+                }
+            });
+            // plyer(players[2 * pos]);
+            // plyer(players[2 * pos + 1]);
+            // plyer(players[2 * (pos + 1 >= len ? pos + 1 - len : pos + 1)]);
+            // plyer(players[2 * (pos + 1 >= len ? pos + 1 - len : pos + 1) + 1]);
+            // plyer(players[2 * (pos + 2 >= len ? pos + 2 - len : pos + 2)]);
+            // plyer(players[2 * (pos + 2 >= len ? pos + 2 - len : pos + 2) + 1]);
+
+            $('.chat img').on('click', function () {
+                $('.popup').empty();
+                let nimg = $('<img src=\"' + $(this).attr('src') + '\" >');
+                nimg.css('height', $('.popup').css('height'));
+                nimg.css('cursor', 'pointer');
+                $('.popup').css('text-align', 'center');
+                $('.popup').css('margin', '0 auto');
+                $('.popup').append(nimg);
+                $('.popup:not(img)').on('click', function () {
+                    $('.popup').hide();
+                });
+                $('.popup').show();
+            });
+
+            loadPlayer();
+        }
+        function loadPlayer() {
+            for (let id in players) {
+                plyer(players[id]);
+            }
+        }
+        function rotateThree(des) {
+            let dis = des >= pos ? des - pos : des + len - pos;
+            let timer;
+            let rote = document.querySelector('.main-c');
+            let page = document.querySelector('.page');
+            let dir = 1;
+            if (dis > len / 2) {
+                dis = len - dis;
+                dir = 0;
+            }
+            if (!dir && rote.offsetLeft == 0) {
+                rote.insertBefore(rote.children[len - 1], rote.children[0]);
+                rote.style.left = -page.offsetWidth + 'px';
+                rote.offsetLeft = -page.offsetWidth;
+            } else if (dir && rote.offsetLeft != 0) {
+                rote.appendChild(rote.removeChild(rote.children[0]));
+                rote.style.left = '0px';
+                rote.offsetLeft = 0;
+            }
+            animate(rote, -page.offsetWidth * dir, dis, function () {
+                if (dir) {
+                    rote.appendChild(rote.removeChild(rote.children[0]));
+                    rote.style.left = '0px';
+                    rote.offsetLeft = 0;
+                }
+                else {
+                    rote.insertBefore(rote.children[len - 1], rote.children[0]);
+                    rote.style.left = -page.offsetWidth + 'px';
+                    rote.offsetLeft = -page.offsetWidth;
+                }
+            });
+            plyer(players[2 * des]);
+            plyer(players[2 * des + 1]);
+            plyer(players[2 * (des + 1 >= len ? des + 1 - len : des + 1)]);
+            plyer(players[2 * (des + 1 >= len ? des + 1 - len : des + 1) + 1]);
+            plyer(players[2 * (des + 2 >= len ? des + 2 - len : des + 2)]);
+            plyer(players[2 * (des + 2 >= len ? des + 2 - len : des + 2) + 1]);
+        }
+
+        function animate(obj, target, time, callback) {
+            clearInterval(obj.timer);
+            var step = (target - obj.offsetLeft) / 10;
+            obj.timer = setInterval(function () {
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                obj.style.left = obj.offsetLeft + step + 'px';
+                if (Math.abs(obj.offsetLeft) == Math.abs(target)) {
+                    clearInterval(obj.timer);
+                    if (callback) {
+                        callback();
+                    }
+                    if (time > 1) {
+                        time--;
+                        animate(obj, target, time, callback);
+                    } else {
+                        flag = true;
+                    }
+                }
+            }, 20);
+        }
+
+        var players = [1, 2, 3, 4, 5, 6, 7, 8];
+        // var pages = document.getElementsByClassName('page');
+        var yuan = document.getElementsByTagName('font');
+        var len = yuan.length;
+        var pos = 0;
+        var flag = true;
+        window.onload = loadPlayer;
+        $(document).ready(initWeb);
+    </script>
+</body>
+
+</html>
